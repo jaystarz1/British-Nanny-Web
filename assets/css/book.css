@@ -371,27 +371,51 @@ a[role="button"] + a[role="button"] {
    HERO SECTION - FIXED VISIBILITY
    ========================================== */
 
-/* Hero Section with READABLE text */
+/* Hero Section with READABLE text - MOBILE OPTIMIZED */
 .hero-book {
     background: linear-gradient(135deg, #012169 0%, #02195C 100%);
     color: #FFFFFF;
-    padding: 60px 20px;
+    padding: 40px 0; /* Vertical padding only, horizontal handled by container */
     text-align: center;
     position: relative;
-    overflow: hidden;
-    min-height: 500px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: visible;
+    min-height: auto; /* Let content determine height */
 }
 
-/* CRITICAL FIX: Make the title clearly visible AND RIGHT-ALIGNED */
+@media (min-width: 768px) {
+    .hero-book {
+        padding: 60px 0;
+        min-height: 500px;
+    }
+}
+
+/* CRITICAL FIX: Make the title clearly visible AND MOBILE-SAFE */
 .hero-title-book {
     color: #FFFFFF !important;
-    font-size: 1.9rem !important; /* Smaller to fit on 2 lines */
+    font-size: 1.6rem !important; /* Smaller for mobile safety */
     font-weight: 700 !important;
-    line-height: 1.15 !important; /* Tighter line height */
-    margin: 20px 0 !important;
+    line-height: 1.2 !important;
+    margin: 15px 0 !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
     font-family: 'Merriweather', serif !important;
-    text-align: center !important; /* Center on mobile */
+    text-align: center !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+}
+
+/* Slightly larger on bigger phones */
+@media (min-width: 380px) {
+    .hero-title-book {
+        font-size: 1.8rem !important;
+    }
+}
+
+@media (min-width: 480px) {
+    .hero-title-book {
+        font-size: 1.9rem !important;
+    }
 }
 
 /* Right-align title on desktop */
@@ -419,21 +443,46 @@ a[role="button"] + a[role="button"] {
 
 .hero-subtitle-book {
     color: #FFFFFF !important;
-    font-size: 1.25rem !important;
+    font-size: 1rem !important; /* Smaller for mobile */
     font-weight: 400 !important;
-    margin: 15px 0 25px !important;
+    margin: 10px 0 20px !important;
     opacity: 0.95 !important;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) !important;
-    text-align: center !important; /* Center on mobile */
+    text-align: center !important;
+    padding: 0 10px !important; /* Inner padding for text safety */
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Adjust subtitle on larger screens */
+@media (min-width: 480px) {
+    .hero-subtitle-book {
+        font-size: 1.15rem !important;
+        margin: 15px 0 25px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero-subtitle-book {
+        font-size: 1.25rem !important;
+        padding: 0 !important;
+    }
 }
 
 /* Mobile title sizing - REMOVED TO AVOID CONFLICTS */
 
-/* Hero container layout */
+/* Hero container layout - FIXED MOBILE PADDING */
 .hero-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 10px; /* Reduced padding for more width */
+    padding: 0 20px; /* Proper mobile padding to prevent cutoff */
+}
+
+/* Extra padding on very small screens */
+@media (max-width: 380px) {
+    .hero-container {
+        padding: 0 15px;
+    }
 }
 
 .hero-content-book {
@@ -468,42 +517,78 @@ a[role="button"] + a[role="button"] {
     }
 }
 
-/* Rating stars visibility */
+/* Rating stars visibility - MOBILE OPTIMIZED */
 .rating-stars {
     color: var(--accent-gold) !important;
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     margin-bottom: 15px !important;
-    text-align: center !important; /* Center rating on mobile */
+    text-align: center !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
 }
 
 .rating-text {
     color: #FFFFFF !important;
-    font-size: 0.9rem !important;
-    margin-left: 10px !important;
+    font-size: 0.75rem !important; /* Smaller on mobile */
     opacity: 0.9 !important;
+    white-space: nowrap !important;
 }
 
-/* Benefits badges - Always centered and single line */
+/* Adjust rating text on larger screens */
+@media (min-width: 480px) {
+    .rating-text {
+        font-size: 0.85rem !important;
+        margin-left: 8px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .rating-stars {
+        font-size: 1.2rem !important;
+    }
+    .rating-text {
+        font-size: 0.9rem !important;
+        margin-left: 10px !important;
+    }
+}
+
+/* Benefits badges - MOBILE RESPONSIVE */
 .hero-benefits-simple {
     display: flex;
-    flex-wrap: nowrap !important; /* Force single line */
-    gap: 5px; /* Very small gap */
-    justify-content: center !important; /* Always center badges */
-    margin: 25px 0;
-    padding: 0 5px; /* Add some padding to prevent edge cutoff */
+    flex-wrap: wrap !important; /* Allow wrapping on very small screens */
+    gap: 8px;
+    justify-content: center !important;
+    margin: 20px 0;
+    padding: 0;
+    width: 100%;
 }
 
 .hero-benefits-simple span {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    padding: 5px 10px; /* Very small padding */
+    padding: 6px 10px;
     border-radius: 18px;
-    font-size: 0.7rem; /* Very small font on mobile */
+    font-size: 0.65rem; /* Smaller base size for mobile */
     color: #FFFFFF;
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0.2);
     white-space: nowrap;
-    flex-shrink: 0; /* Prevent badges from shrinking */
+    flex: 0 0 auto; /* Allow natural sizing */
+    max-width: calc(50% - 4px); /* Ensure 2 per row minimum on tiny screens */
+}
+
+/* Very small screens - stack badges */
+@media (max-width: 360px) {
+    .hero-benefits-simple {
+        gap: 6px;
+    }
+    .hero-benefits-simple span {
+        font-size: 0.6rem;
+        padding: 5px 8px;
+    }
 }
 
 /* Slightly larger on small screens */
