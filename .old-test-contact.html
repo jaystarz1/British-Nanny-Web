@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Section Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/daycare.css">
+</head>
+<body>
+    <!-- Contact Section - Complete Redesign -->
+    <section id="contact" class="final-cta">
+        <div class="container">
+            <h2>Reserve Your Child's Spot Today</h2>
+            <p class="final-cta-subtitle">September Opening Available - Limited to 5 Children Total</p>
+            
+            <div class="cta-grid">
+                <!-- Left Column: Contact Info -->
+                <div class="cta-info-wrapper">
+                    <div class="cta-info">
+                        <div class="info-card">
+                            <span class="info-icon">📞</span>
+                            <h3>Call Us</h3>
+                            <p><a href="tel:6133555544">(613) 355-5544</a></p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <span class="info-icon">📧</span>
+                            <h3>Email</h3>
+                            <p><a href="mailto:thebritishnanny@gmail.com">thebritishnanny@gmail.com</a></p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <span class="info-icon">📍</span>
+                            <h3>Location</h3>
+                            <p>Barrhaven, Ottawa<br>
+                            <small>Address provided upon contact</small></p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-features">
+                        <div class="feature-item">40+ years of professional experience</div>
+                        <div class="feature-item">NNEB British certification</div>
+                        <div class="feature-item">Published potty training expert</div>
+                        <div class="feature-item">Allergy specialist (EpiPen trained)</div>
+                        <div class="feature-item">Screen-free learning environment</div>
+                        <div class="feature-item">Maximum 5 children</div>
+                        <div class="feature-item">Proven track record with Ottawa families</div>
+                        <div class="feature-item">Hours: Mon-Fri, 7:30 AM - 5:00 PM</div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Contact Form -->
+                <div class="cta-form-card">
+                    <h3>Schedule a Visit</h3>
+                    <form id="contact-form" class="cta-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div class="form-group">
+                            <label for="parent-name">Parent's Name <span class="required">*</span></label>
+                            <input type="text" id="parent-name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="child-age">Child's Age <span class="required">*</span></label>
+                            <select id="child-age" name="child-age" required>
+                                <option value="">Select Age</option>
+                                <option value="1 year">1 year</option>
+                                <option value="1.5 years">1.5 years</option>
+                                <option value="2 years">2 years</option>
+                                <option value="2.5 years">2.5 years</option>
+                                <option value="3 years">3 years</option>
+                                <option value="3.5 years">3.5 years</option>
+                                <option value="4 years">4 years</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="start-date">Desired Start Date</label>
+                            <input type="text" id="start-date" name="start-date" placeholder="e.g., September 2025">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message / Special Needs</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your child's needs, especially any allergies or special requirements"></textarea>
+                        </div>
+                        
+                        <button type="submit">Request Information & Schedule Visit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

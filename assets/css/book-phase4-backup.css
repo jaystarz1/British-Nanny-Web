@@ -1,0 +1,430 @@
+/* ==========================================
+   PHASE 4: LAYOUT & VISUAL CONSISTENCY FIXES
+   Book Landing Page - The British Nanny's Guide
+   ========================================== */
+
+/* ==========================================
+   4.1 - FIX TEXT ALIGNMENT
+   Maintain center alignment across all breakpoints
+   ========================================== */
+
+/* Ensure all sections maintain center alignment on mobile */
+@media (max-width: 767px) {
+    /* Force center alignment for all text content */
+    .hero-text,
+    .hero-content-book,
+    .problem-solution .container,
+    .book-overview .container,
+    .whats-inside .container,
+    .differentiation .container,
+    .author-content-simplified,
+    .reviews-section .container,
+    .faq-content-static,
+    .final-cta .container {
+        text-align: center !important;
+    }
+    
+    /* Center align all headings */
+    h1, h2, h3, h4, h5, h6,
+    .section-title,
+    .section-subtitle {
+        text-align: center !important;
+    }
+    
+    /* Center align paragraphs and lists in sections */
+    section p,
+    section ul,
+    section li {
+        text-align: center !important;
+    }
+    
+    /* Exception: Keep card content left-aligned for readability */
+    .content-card,
+    .review-card.featured,
+    .diff-point,
+    .faq-item-static {
+        text-align: left !important;
+    }
+    
+    .content-card h3,
+    .review-card.featured blockquote,
+    .diff-point h3,
+    .faq-item-static h3 {
+        text-align: left !important;
+    }
+}
+
+/* Consistent padding across all sections */
+section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Fix container max-widths for consistency */
+.container,
+.hero-container,
+.content-grid,
+.reviews-grid-streamlined,
+.diff-content,
+.faq-content-static,
+.author-content-simplified {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (min-width: 768px) {
+    .container,
+    .hero-container {
+        max-width: 1200px;
+    }
+    
+    .content-grid,
+    .reviews-grid-streamlined,
+    .diff-content {
+        max-width: 1000px;
+    }
+    
+    .faq-content-static,
+    .author-content-simplified,
+    .problem-solution .container,
+    .bonus-content {
+        max-width: 800px;
+    }
+}
+
+/* ==========================================
+   4.2 - IMPROVE SECTION FLOW
+   Better visual transitions and spacing
+   ========================================== */
+
+/* Add visual dividers between sections */
+section {
+    position: relative;
+}
+
+/* Subtle wave divider between sections */
+section::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: inherit;
+    clip-path: ellipse(50% 40px at 50% 0%);
+    z-index: 1;
+}
+
+/* Remove divider from last section */
+.final-cta::after,
+.site-footer::after {
+    display: none;
+}
+
+/* Improved section spacing */
+section {
+    padding-top: 60px;
+    padding-bottom: 80px; /* Extra for wave effect */
+}
+
+@media (max-width: 767px) {
+    section {
+        padding-top: 40px;
+        padding-bottom: 60px;
+    }
+}
+
+/* Progressive disclosure - collapsible detailed content */
+.expandable-content {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.5s ease;
+}
+
+.expandable-content.expanded {
+    max-height: 2000px;
+}
+
+.expandable-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, currentColor);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.expandable-content.expanded::after {
+    display: none;
+}
+
+.expand-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--british-navy);
+    border: 1px solid var(--british-navy);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.expand-button:hover {
+    background: var(--british-navy);
+    color: var(--white);
+}
+
+/* Smoother scroll behavior */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed header */
+}
+
+/* ==========================================
+   4.3 - OPTIMIZE "WHAT'S INSIDE" SECTION
+   Improve scanability and visual hierarchy
+   ========================================== */
+
+/* Add icons to content cards */
+.content-card::before {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    background: var(--soft-blue);
+    border-radius: 50%;
+    position: relative;
+}
+
+/* Icon styles for each card type */
+.content-card:nth-child(1)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23012169' stroke-width='2'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+}
+
+.content-card:nth-child(2)::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23012169' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+}
+
+/* Accordion for detailed information */
+.content-accordion {
+    margin-top: 30px;
+}
+
+.accordion-item {
+    background: var(--white);
+    border: 1px solid rgba(1, 33, 105, 0.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    background: var(--soft-blue);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(1, 33, 105, 0.1);
+}
+
+.accordion-header h4 {
+    margin: 0;
+    color: var(--british-navy);
+    font-size: 1.1rem;
+}
+
+.accordion-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 20px;
+    max-height: 500px;
+}
+
+/* Improved visual hierarchy with better spacing */
+.whats-inside .section-title {
+    margin-bottom: 15px;
+}
+
+.whats-inside .section-subtitle {
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Compact card layout for mobile */
+@media (max-width: 767px) {
+    .content-card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .content-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .content-card ul {
+        font-size: 0.95rem;
+    }
+    
+    .content-card li {
+        margin-bottom: 5px;
+    }
+}
+
+/* ==========================================
+   ADDITIONAL VISUAL CONSISTENCY FIXES
+   ========================================== */
+
+/* Ensure consistent button sizing */
+.btn {
+    min-width: 200px;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .btn {
+        min-width: 100%;
+        display: block;
+    }
+}
+
+/* Fix image consistency */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Consistent border radius */
+.content-card,
+.review-card,
+.diff-point,
+.faq-item-static,
+.bonus-content,
+.connection-box,
+.local-box,
+.solution {
+    border-radius: 15px;
+}
+
+/* Consistent shadows */
+.content-card,
+.diff-point,
+.faq-item-static {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Fix tablet layout shifts */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Maintain center alignment where needed */
+    .hero-text {
+        text-align: left;
+    }
+    
+    .hero-benefits-simple {
+        justify-content: flex-start;
+    }
+    
+    /* Adjust grid layouts for tablet */
+    .content-grid,
+    .diff-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .reviews-grid-streamlined {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Desktop refinements */
+@media (min-width: 1024px) {
+    /* Ensure proper alignment */
+    .hero-text {
+        text-align: left;
+    }
+    
+    /* Center other content appropriately */
+    .problem-solution,
+    .book-overview,
+    .differentiation,
+    .author-section,
+    .faq-section,
+    .final-cta {
+        text-align: center;
+    }
+    
+    /* Left-align card content for readability */
+    .content-card,
+    .diff-point,
+    .faq-item-static {
+        text-align: left;
+    }
+}
+
+/* ==========================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* Reduce animation overhead */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Optimize rendering */
+.content-card,
+.review-card,
+.diff-point {
+    will-change: transform;
+}
+
+/* Remove will-change after animation */
+.content-card:not(:hover),
+.review-card:not(:hover),
+.diff-point:not(:hover) {
+    will-change: auto;
+}

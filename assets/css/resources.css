@@ -1,0 +1,439 @@
+/* Resource Pages Styles */
+/* Styles for the 5 SEO-focused resource pages */
+
+/* Resource Content Layout */
+.resource-content {
+    padding: 60px 0;
+    background: white;
+    min-height: 60vh;
+}
+
+.resource-content .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Resource Hero Section */
+.resource-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #F5E6D3;
+}
+
+.resource-hero h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    color: #012169;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.resource-intro {
+    font-size: 1.25rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+}
+
+.resource-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.resource-meta .author {
+    color: #012169;
+    font-weight: 500;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    background: #F5E6D3;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.table-of-contents h2 {
+    font-size: 1.25rem;
+    color: #012169;
+    margin-bottom: 1rem;
+}
+
+.table-of-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.table-of-contents li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(1,33,105,0.1);
+}
+
+.table-of-contents li:last-child {
+    border-bottom: none;
+}
+
+.table-of-contents a {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.table-of-contents a:hover {
+    color: #012169;
+    padding-left: 10px;
+}
+
+.table-of-contents a::before {
+    content: '→';
+    margin-right: 0.5rem;
+    color: #CF142B;
+}
+
+/* Content Sections */
+.content-section {
+    margin-bottom: 3rem;
+}
+
+.content-section h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    color: #012169;
+    margin-bottom: 1.5rem;
+    padding-top: 2rem;
+    border-top: 3px solid #F5E6D3;
+}
+
+.content-section h3 {
+    font-size: 1.5rem;
+    color: #012169;
+    margin: 2rem 0 1rem;
+}
+
+.content-section h4 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 1.5rem 0 1rem;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.content-section ul,
+.content-section ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.content-section li {
+    margin-bottom: 0.75rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.content-section strong {
+    color: #012169;
+    font-weight: 600;
+}
+
+/* Checkmark Lists */
+.checkmark-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.checkmark-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.checkmark-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #CF142B;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Question Cards */
+.question-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.question-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.question-card h4 {
+    color: #012169;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.question-card p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+/* Highlighted Boxes */
+.highlight-box {
+    background: #F5E6D3;
+    border-left: 4px solid #012169;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.highlight-box h4 {
+    color: #012169;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.warning-box {
+    background: #FFF3CD;
+    border-left: 4px solid #CF142B;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.tip-box {
+    background: #E8F5E9;
+    border-left: 4px solid #4CAF50;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Downloadable Resources */
+.download-box {
+    background: linear-gradient(135deg, #012169, #1e3a8a);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.download-box h3 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.download-box p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+}
+
+.download-box .btn {
+    background: white;
+    color: #012169;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.download-box .btn:hover {
+    background: #CF142B;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Resource CTA Section */
+.resource-cta {
+    background: #F5E6D3;
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    margin: 4rem 0;
+}
+
+.resource-cta h3 {
+    font-size: 2rem;
+    color: #012169;
+    margin-bottom: 1rem;
+}
+
+.resource-cta p {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.resource-cta .btn {
+    background: #CF142B;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.resource-cta .btn:hover {
+    background: #012169;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(1,33,105,0.3);
+}
+
+/* Related Resources */
+.related-resources {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 2px solid #F5E6D3;
+}
+
+.related-resources h3 {
+    font-size: 1.75rem;
+    color: #012169;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.related-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.related-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    border-color: #012169;
+}
+
+.related-card h4 {
+    color: #012169;
+    margin-bottom: 0.5rem;
+}
+
+.related-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Numbered Lists */
+.numbered-list {
+    counter-reset: item;
+    list-style: none;
+    padding-left: 0;
+}
+
+.numbered-list li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.numbered-list li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #012169;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Print Styles */
+@media print {
+    .site-header,
+    .site-footer,
+    .breadcrumb,
+    .table-of-contents,
+    .resource-cta,
+    .related-resources {
+        display: none;
+    }
+    
+    .resource-content {
+        padding: 0;
+    }
+    
+    .content-section {
+        page-break-inside: avoid;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resource-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .resource-intro {
+        font-size: 1.1rem;
+    }
+    
+    .resource-content .container {
+        padding: 0 1rem;
+    }
+    
+    .content-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .content-section p,
+    .content-section li {
+        font-size: 1rem;
+    }
+    
+    .table-of-contents {
+        padding: 1.5rem;
+    }
+    
+    .resource-cta {
+        padding: 2rem 1.5rem;
+    }
+    
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+}

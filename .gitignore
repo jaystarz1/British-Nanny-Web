@@ -1,0 +1,39 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if any are added later)
+node_modules/
+
+# Build files (if any build process is added)
+dist/
+build/
+
+# Environment files (if any are added)
+.env
+.env.local
+
+# Backup files
+*.backup
+*.bak
+
+# Image originals (keep only optimized versions)
+*.psd
+*.ai
+*.sketch

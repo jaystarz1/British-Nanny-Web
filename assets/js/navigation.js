@@ -1,0 +1,119 @@
+// Enhanced Navigation JavaScript
+// Handles dropdown menus and mobile navigation for multi-page site
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Menu Toggle
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+    const mobileClose = document.querySelector('.mobile-menu-close');
+    
+    function openMobileMenu() {
+        mobileMenu?.classList.add('active');
+        mobileOverlay?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMobileMenu() {
+        mobileMenu?.classList.remove('active');
+        mobileOverlay?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    mobileToggle?.addEventListener('click', openMobileMenu);
+    mobileClose?.addEventListener('click', closeMobileMenu);
+    mobileOverlay?.addEventListener('click', closeMobileMenu);
+    
+    // Close mobile menu when clicking on a link
+    const mobileLinks = document.querySelectorAll('.mobile-menu nav a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (link.getAttribute('href').startsWith('#')) {
+                closeMobileMenu();
+            }
+        });
+    });
+    
+    // Dropdown Menu Enhancement for Desktop
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        let timeout;
+        
+        dropdown.addEventListener('mouseenter', () => {
+            clearTimeout(timeout);
+            dropdown.classList.add('active');
+        });
+        
+        dropdown.addEventListener('mouseleave', () => {
+            timeout = setTimeout(() => {
+                dropdown.classList.remove('active');
+            }, 200);
+        });
+    });
+    
+    // Active Page Highlighting
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-menu a, .mobile-menu nav a');
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+            // Check if this is the current page
+            if (currentPath.includes(href) || 
+                (currentPath === '/' && href === 'index.html') ||
+                (currentPath === '/index.html' && href === 'index.html')) {
+                link.classList.add('active');
+            }
+        }
+    });
+    
+    // Smooth Scrolling for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offset = 80; // Account for sticky header
+                const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Sticky Header Enhancement
+    const header = document.querySelector('.site-header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+            header?.classList.remove('scrolled');
+        } else {
+            header?.classList.add('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+});
+
+// Function to update navigation for current page
+function updateNavigationForPage(pageName) {
+    const navItems = document.querySelectorAll('.nav-menu a, .mobile-menu nav a');
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.textContent.toLowerCase().includes(pageName.toLowerCase())) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// Export for use in other scripts
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { updateNavigationForPage };
+}
