@@ -513,7 +513,33 @@ a:hover {
     touch-action: manipulation;
     min-height: 48px; /* Touch target minimum */
     line-height: 1.2;
-    white-space: nowrap;
+    white-space: normal; /* Allow text wrapping on mobile */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Desktop: Prevent text wrapping for larger screens */
+@media (min-width: 768px) {
+    .btn {
+        white-space: nowrap;
+    }
+}
+
+/* Mobile-specific button adjustments */
+@media (max-width: 767px) {
+    .btn {
+        font-size: 0.9rem; /* Slightly smaller text on mobile */
+        padding: 12px 20px; /* Slightly smaller padding */
+        min-width: 0; /* Remove any min-width constraints */
+        max-width: 100%; /* Ensure button doesn't exceed container */
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        display: block; /* Full width on mobile */
+        width: 100%;
+        margin: 0 auto var(--spacing-md) auto;
+    }
 }
 
 /* PHASE 1 FIX: Updated button styles - PHASE 6 REFINED */
