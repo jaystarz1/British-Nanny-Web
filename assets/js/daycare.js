@@ -145,10 +145,12 @@
                 successDiv.remove();
             }, 5000);
             
-            // Scroll to success message on mobile (use RAF to avoid reflow)
+            // Scroll to success message on mobile (double RAF to ensure layout is complete)
             if (window.innerWidth < 768) {
                 requestAnimationFrame(() => {
-                    successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    requestAnimationFrame(() => {
+                        successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    });
                 });
             }
         }
@@ -184,12 +186,14 @@
                 if (!isExpanded) {
                     this.classList.add('expanded');
                     
-                    // Scroll card into view on mobile (use RAF to avoid reflow)
+                    // Scroll card into view on mobile (double RAF for layout stability)
                     if (window.innerWidth < 768) {
                         requestAnimationFrame(() => {
-                            this.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'center' 
+                            requestAnimationFrame(() => {
+                                this.scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'center' 
+                                });
                             });
                         });
                     }
@@ -279,28 +283,41 @@
         
         testimonialGrid.parentNode.appendChild(dotsContainer);
         
-        // Cache card width to avoid reflows
-        let cachedCardWidth = null;
+        // Use measurement cache to avoid reflows
         function getCardWidth() {
-            if (cachedCardWidth === null) {
-                cachedCardWidth = testimonials[0].offsetWidth + 24; // width + gap
+            // Try to get from cache first
+            if (window.MeasurementCache) {
+                const cached = window.MeasurementCache.getCarousel(testimonialGrid);
+                if (cached) {
+                    return cached.itemWidth + cached.gap;
+                }
             }
-            return cachedCardWidth;
+            // Fallback if cache not available
+            return testimonials[0].offsetWidth + 24;
         }
         
-        // Update dots on scroll (throttled to avoid reflows)
+        // Update dots on scroll (optimized to prevent reflows)
         let scrollTimeout;
+        let lastScrollLeft = 0;
+        
         testimonialGrid.addEventListener('scroll', () => {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
-                const scrollLeft = testimonialGrid.scrollLeft;
-                const cardWidth = getCardWidth();
-                const newIndex = Math.round(scrollLeft / cardWidth);
-                
-                if (newIndex !== currentIndex) {
-                    updateDots(newIndex);
-                    currentIndex = newIndex;
-                }
+                // Use RAF to batch DOM reads
+                requestAnimationFrame(() => {
+                    const scrollLeft = testimonialGrid.scrollLeft;
+                    // Only proceed if scroll actually changed
+                    if (Math.abs(scrollLeft - lastScrollLeft) > 5) {
+                        lastScrollLeft = scrollLeft;
+                        const cardWidth = getCardWidth();
+                        const newIndex = Math.round(scrollLeft / cardWidth);
+                        
+                        if (newIndex !== currentIndex) {
+                            updateDots(newIndex);
+                            currentIndex = newIndex;
+                        }
+                    }
+                });
             }, 50);
         }, { passive: true });
         
@@ -312,10 +329,7 @@
             });
         }
         
-        // Recalculate cached width on resize
-        window.addEventListener('resize', debounce(() => {
-            cachedCardWidth = null;
-        }, 250));
+        // Cache will auto-update on resize via MeasurementCache
         
         function updateDots(activeIndex) {
             const dots = dotsContainer.querySelectorAll('.testimonial-dot');

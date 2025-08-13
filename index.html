@@ -119,13 +119,13 @@
     </noscript>
     
     <!-- Defer non-critical CSS -->
-    <link rel="preload" href="assets/css/style.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="assets/css/daycare.css?v=1.3.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/style.css?v=1.4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/daycare.css?v=1.4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fallback for no JavaScript -->
     <noscript>
-        <link rel="stylesheet" href="assets/css/style.css?v=1.3.0">
-        <link rel="stylesheet" href="assets/css/daycare.css?v=1.3.0">
+        <link rel="stylesheet" href="assets/css/style.css?v=1.4.0">
+        <link rel="stylesheet" href="assets/css/daycare.css?v=1.4.0">
     </noscript>
     
     <!-- Inline Styles for Contact Section -->
@@ -1197,24 +1197,33 @@
         });
         
         // Load non-critical scripts asynchronously
-        function loadScript(src) {
+        function loadScript(src, callback) {
             var script = document.createElement('script');
             script.src = src;
             script.async = true;
+            if (callback) {
+                script.onload = callback;
+            }
             document.body.appendChild(script);
+        }
+        
+        // Load measurement cache first, then other scripts
+        function loadAllScripts() {
+            // Load measurement cache first
+            loadScript('assets/js/measurements.min.js?v=1.4.0', function() {
+                // Then load other scripts
+                loadScript('assets/js/common.min.js?v=1.4.0');
+                loadScript('assets/js/daycare.min.js?v=1.4.0');
+            });
         }
         
         // Load scripts after page is interactive
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    loadScript('assets/js/common.min.js?v=1.3.0');
-                    loadScript('assets/js/daycare.min.js?v=1.3.0');
-                }, 100);
+                setTimeout(loadAllScripts, 100);
             });
         } else {
-            loadScript('assets/js/common.min.js?v=1.3.0');
-            loadScript('assets/js/daycare.min.js?v=1.3.0');
+            loadAllScripts();
         }
     </script>
 </body>

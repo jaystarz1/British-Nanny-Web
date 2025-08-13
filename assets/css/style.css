@@ -16,7 +16,7 @@ img {
     height: auto;
 }
 
-/* Layout Stability - Prevent CLS */
+/* Layout Stability - Prevent CLS and Reflows */
 html {
     /* Prevent font-size changes from causing layout shifts */
     text-size-adjust: 100%;
@@ -27,6 +27,35 @@ body {
     /* Contain layout shifts */
     contain: layout style;
     min-height: 100vh;
+}
+
+/* Performance: Add containment to major sections */
+section, 
+.hero,
+.action-section,
+.services-section,
+.testimonials-section,
+.faq-section,
+.final-cta,
+footer {
+    /* Contain layout and paint to prevent reflow cascading */
+    contain: layout paint;
+}
+
+/* Contain carousels to prevent reflows */
+.carousel-container,
+.testimonials-grid {
+    contain: layout size paint;
+    /* Pre-allocate space */
+    min-height: 400px;
+}
+
+/* Optimize animations */
+.carousel-item,
+.testimonial-card,
+.service-card {
+    will-change: transform;
+    transform: translateZ(0); /* Force GPU acceleration */
 }
 
 /* Gallery images - maintain 4:3 aspect ratio */
