@@ -1653,8 +1653,109 @@ a[class*="btn-"]:focus {
 }
 
 /* ==========================================
-   PRINT STYLES
+   MOBILE BUTTON TEXT FIXES
    ========================================== */
+
+/* Hide/show button text based on screen size */
+.btn-text-mobile {
+    display: none;
+}
+
+.btn-text-desktop {
+    display: inline;
+}
+
+@media (max-width: 767px) {
+    .btn-text-mobile {
+        display: inline;
+    }
+    
+    .btn-text-desktop {
+        display: none;
+    }
+    
+    /* Ensure reviews CTA button doesn't overflow */
+    .reviews-cta-btn {
+        padding: 16px 20px !important;
+        font-size: 16px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+    
+    .reviews-cta {
+        padding: 0 15px;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   MOBILE OVERFLOW FIXES - AUTHOR SECTION
+   ========================================== */
+
+@media (max-width: 767px) {
+    /* Fix Professional Background overflow on mobile */
+    .author-section .credentials {
+        overflow: hidden;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 20px 15px;
+    }
+    
+    .author-section .credentials h4 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        font-size: 1.2rem;
+    }
+    
+    .author-section .credentials-list > div {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        padding-right: 10px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .author-section .check-list > div {
+        padding-left: 20px;
+        position: relative;
+        word-break: break-word;
+    }
+    
+    .author-section .check-list > div::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--british-red, #CF142B);
+    }
+    
+    /* Ensure all author content fits */
+    .author-bio {
+        padding: 0 10px;
+    }
+    
+    .author-content-simplified {
+        padding: 0;
+    }
+    
+    .experience p,
+    .author-quote blockquote p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Daycare connection box */
+    .connection-box {
+        padding: 20px 15px;
+        word-wrap: break-word;
+    }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ==========================================
 
 @media print {
     .site-header,
