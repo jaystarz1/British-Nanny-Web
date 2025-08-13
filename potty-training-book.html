@@ -27,8 +27,90 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/book.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2.1">
+    <link rel="stylesheet" href="assets/css/book.css?v=2.1">
+    
+    <!-- CRITICAL MOBILE FIX INLINE CSS -->
+    <style>
+    @media only screen and (max-width: 767px) {
+        /* FORCE BOOK IMAGE ON TOP */
+        .hero-book .hero-content-book {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 20px !important;
+            padding: 20px 0 !important;
+        }
+        
+        /* BOOK FIRST */
+        .hero-book .hero-image {
+            order: 1 !important;
+            width: 100% !important;
+            max-width: 250px !important;
+            margin: 0 auto 20px auto !important;
+        }
+        
+        /* TEXT SECOND */
+        .hero-book .hero-text {
+            order: 2 !important;
+            width: 100% !important;
+            padding: 0 15px !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* FIX TEXT OVERFLOW */
+        .hero-book .hero-title-book {
+            font-size: 1.5rem !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            hyphens: auto !important;
+            padding: 0 10px !important;
+            margin: 10px 0 !important;
+        }
+        
+        .hero-book .hero-subtitle-book {
+            font-size: 0.95rem !important;
+            line-height: 1.3 !important;
+            word-break: break-word !important;
+            padding: 0 10px !important;
+            margin: 10px 0 15px !important;
+        }
+        
+        /* FIX BENEFITS OVERFLOW */
+        .hero-book .hero-benefits-simple {
+            width: 100% !important;
+            padding: 0 10px !important;
+            box-sizing: border-box !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            gap: 5px !important;
+        }
+        
+        .hero-book .hero-benefits-simple span {
+            font-size: 0.7rem !important;
+            padding: 5px 8px !important;
+            white-space: nowrap !important;
+        }
+        
+        /* FIX CONTAINER OVERFLOW */
+        .hero-book,
+        .hero-book .hero-container,
+        .hero-book .hero-content-book,
+        .hero-book .hero-text {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+        
+        /* CENTER EVERYTHING */
+        .hero-book .rating-stars,
+        .hero-book .hero-cta-book {
+            text-align: center !important;
+            justify-content: center !important;
+        }
+    }
+    </style>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
