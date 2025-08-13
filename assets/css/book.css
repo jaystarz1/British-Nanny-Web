@@ -1980,8 +1980,75 @@ a[class*="btn-"]:focus {
 }
 
 /* ==========================================
-   PRINT STYLES
-   ==========================================
+   MOBILE NUCLEAR OPTION - FORCE IT TO WORK
+   ========================================== */
+
+@media only screen and (max-width: 767px) {
+    /* KILL ANY DESKTOP STYLES */
+    .hero-book .hero-content-book {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 20px !important;
+    }
+    
+    /* BOOK MUST BE ON TOP */
+    .hero-book .hero-image {
+        order: -1 !important; /* Negative order forces it first */
+        width: 100% !important;
+        max-width: 250px !important;
+        margin: 0 auto 20px auto !important;
+        display: block !important;
+    }
+    
+    /* TEXT MUST BE BELOW */
+    .hero-book .hero-text {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 20px !important;
+        margin: 0 !important;
+    }
+    
+    /* CENTER ALL THE THINGS */
+    .hero-book .rating-stars,
+    .hero-book .hero-title-book,
+    .hero-book .hero-subtitle-book,
+    .hero-book .hero-benefits-simple,
+    .hero-book .hero-cta-book {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    /* FIX THE RATING STARS */
+    .hero-book .rating-stars {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* FIX THE BENEFITS */
+    .hero-book .hero-benefits-simple {
+        display: flex !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+    }
+    
+    /* READABLE TEXT SIZES */
+    .hero-book .hero-title-book {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-book .hero-subtitle-book {
+        font-size: 1rem !important;
+        line-height: 1.4 !important;
+    }
+}
 
 @media print {
     .site-header,
