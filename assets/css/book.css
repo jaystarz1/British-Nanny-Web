@@ -1691,64 +1691,60 @@ a[class*="btn-"]:focus {
    DESKTOP HERO TEXT - MAKE IT HUGE
    ========================================== */
 
-/* Desktop title needs to be MUCH BIGGER */
+/* Desktop - REASONABLE sizing */
 @media (min-width: 768px) {
     .hero-title-book {
         text-align: right !important;
-        font-size: 3.5rem !important; /* MUCH BIGGER */
+        font-size: 2.8rem !important; /* Reasonable increase */
         line-height: 1.1 !important;
-        margin: 30px 0 !important;
+        margin: 20px 0 !important;
     }
     
     .hero-subtitle-book {
         text-align: right !important;
-        font-size: 1.6rem !important; /* BIGGER SUBTITLE */
-        margin: 20px 0 30px !important;
+        font-size: 1.3rem !important;
+        margin: 15px 0 25px !important;
     }
     
     .rating-stars {
         text-align: right !important;
         justify-content: flex-end !important;
-        font-size: 1.4rem !important; /* BIGGER STARS */
+        font-size: 1.2rem !important;
     }
     
     .rating-text {
-        font-size: 1.1rem !important;
+        font-size: 0.95rem !important;
     }
     
     .hero-benefits-simple {
-        justify-content: flex-end !important; /* Right align on desktop */
+        justify-content: flex-end !important;
     }
     
     .hero-benefits-simple span {
-        font-size: 1.1rem !important; /* BIGGER BADGES */
-        padding: 12px 20px !important;
+        font-size: 0.95rem !important;
+        padding: 10px 18px !important;
     }
 }
 
-/* Even bigger on large screens */
+/* Slightly bigger on large screens */
 @media (min-width: 1024px) {
     .hero-title-book {
-        font-size: 4.5rem !important; /* HUGE */
+        font-size: 3.2rem !important;
     }
     
     .hero-subtitle-book {
-        font-size: 1.8rem !important;
-    }
-    
-    .hero-benefits-simple span {
-        font-size: 1.2rem !important;
+        font-size: 1.4rem !important;
     }
 }
 
-/* Massive on extra large screens */
+/* Max size on extra large screens */
 @media (min-width: 1400px) {
     .hero-title-book {
-        font-size: 5rem !important; /* MASSIVE */
+        font-size: 3.5rem !important;
     }
     
     .hero-subtitle-book {
-        font-size: 2rem !important;
+        font-size: 1.5rem !important;
     }
 }
 
@@ -1757,37 +1753,43 @@ a[class*="btn-"]:focus {
    ========================================== */
 
 @media (max-width: 767px) {
-    /* MOBILE ONLY: Stack content vertically */
+    /* MOBILE: Fix the layout completely */
     .hero-content-book {
         flex-direction: column !important;
         align-items: center !important;
         gap: 20px !important;
     }
     
-    /* MOBILE ONLY: Center all text on mobile */
-    .hero-text {
-        text-align: center !important;
-        order: 2 !important; /* Text below image on mobile */
-        width: 100% !important;
-        padding: 0 10px !important;
-    }
-    
-    /* MOBILE ONLY: Book image first on mobile */
+    /* MOBILE: Book image at top */
     .hero-image {
         order: 1 !important;
-        margin: 0 auto !important;
+        margin: 0 auto 20px !important;
+        max-width: 220px !important;
     }
     
-    /* MOBILE ONLY: Center align everything */
-    .hero-title-book,
-    .hero-subtitle-book,
-    .rating-stars {
+    /* MOBILE: Text content below book */
+    .hero-text {
+        order: 2 !important;
+        width: 100% !important;
+        padding: 0 15px !important;
         text-align: center !important;
     }
     
-    /* MOBILE ONLY: Center benefits */
-    .hero-benefits-simple {
+    /* MOBILE: Center everything */
+    .hero-title-book,
+    .hero-subtitle-book,
+    .rating-stars,
+    .hero-benefits-simple,
+    .hero-cta-book {
+        text-align: center !important;
         justify-content: center !important;
+    }
+    
+    /* MOBILE: Rating fix */
+    .rating-stars {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
     
     /* Force all hero elements to respect boundaries */
