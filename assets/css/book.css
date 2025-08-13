@@ -516,22 +516,25 @@ a[role="button"] + a[role="button"] {
     box-sizing: border-box;
 }
 
+/* DESKTOP ONLY: Side by side layout - DO NOT CHANGE */
 @media (min-width: 768px) {
     .hero-content-book {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px; /* Even closer on tablet/desktop */
+        flex-direction: row !important; /* FORCE side-by-side on desktop */
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 20px !important; /* Even closer on tablet/desktop */
     }
     
     .hero-text {
-        flex: 1;
-        max-width: 550px; /* Slightly smaller to bring book closer */
-        /* Text alignment handled by individual elements */
+        flex: 1 !important;
+        max-width: 550px !important; /* Slightly smaller to bring book closer */
+        order: 1 !important; /* Text on LEFT on desktop */
+        text-align: left !important; /* Left align text container */
     }
     
     .hero-image {
-        flex: 0 0 auto;
+        flex: 0 0 auto !important;
+        order: 2 !important; /* Image on RIGHT on desktop */
     }
 }
 
@@ -1685,10 +1688,108 @@ a[class*="btn-"]:focus {
 }
 
 /* ==========================================
+   DESKTOP HERO TEXT - MAKE IT HUGE
+   ========================================== */
+
+/* Desktop title needs to be MUCH BIGGER */
+@media (min-width: 768px) {
+    .hero-title-book {
+        text-align: right !important;
+        font-size: 3.5rem !important; /* MUCH BIGGER */
+        line-height: 1.1 !important;
+        margin: 30px 0 !important;
+    }
+    
+    .hero-subtitle-book {
+        text-align: right !important;
+        font-size: 1.6rem !important; /* BIGGER SUBTITLE */
+        margin: 20px 0 30px !important;
+    }
+    
+    .rating-stars {
+        text-align: right !important;
+        justify-content: flex-end !important;
+        font-size: 1.4rem !important; /* BIGGER STARS */
+    }
+    
+    .rating-text {
+        font-size: 1.1rem !important;
+    }
+    
+    .hero-benefits-simple {
+        justify-content: flex-end !important; /* Right align on desktop */
+    }
+    
+    .hero-benefits-simple span {
+        font-size: 1.1rem !important; /* BIGGER BADGES */
+        padding: 12px 20px !important;
+    }
+}
+
+/* Even bigger on large screens */
+@media (min-width: 1024px) {
+    .hero-title-book {
+        font-size: 4.5rem !important; /* HUGE */
+    }
+    
+    .hero-subtitle-book {
+        font-size: 1.8rem !important;
+    }
+    
+    .hero-benefits-simple span {
+        font-size: 1.2rem !important;
+    }
+}
+
+/* Massive on extra large screens */
+@media (min-width: 1400px) {
+    .hero-title-book {
+        font-size: 5rem !important; /* MASSIVE */
+    }
+    
+    .hero-subtitle-book {
+        font-size: 2rem !important;
+    }
+}
+
+/* ==========================================
    CRITICAL MOBILE HERO FIXES - ULTRA PRIORITY
    ========================================== */
 
 @media (max-width: 767px) {
+    /* MOBILE ONLY: Stack content vertically */
+    .hero-content-book {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+    
+    /* MOBILE ONLY: Center all text on mobile */
+    .hero-text {
+        text-align: center !important;
+        order: 2 !important; /* Text below image on mobile */
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+    
+    /* MOBILE ONLY: Book image first on mobile */
+    .hero-image {
+        order: 1 !important;
+        margin: 0 auto !important;
+    }
+    
+    /* MOBILE ONLY: Center align everything */
+    .hero-title-book,
+    .hero-subtitle-book,
+    .rating-stars {
+        text-align: center !important;
+    }
+    
+    /* MOBILE ONLY: Center benefits */
+    .hero-benefits-simple {
+        justify-content: center !important;
+    }
+    
     /* Force all hero elements to respect boundaries */
     .hero-book,
     .hero-container,
@@ -1697,12 +1798,6 @@ a[class*="btn-"]:focus {
         max-width: 100% !important;
         overflow-x: hidden !important;
         box-sizing: border-box !important;
-    }
-    
-    /* Ensure hero text doesn't overflow */
-    .hero-text {
-        padding: 0 10px !important;
-        width: 100% !important;
     }
     
     /* Title ultra-safe sizing */
