@@ -10,6 +10,38 @@
     box-sizing: border-box;
 }
 
+/* Prevent Layout Shifts - Fixed Aspect Ratios for Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Gallery images - maintain 4:3 aspect ratio */
+.carousel-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Book cover images - maintain 2:3 aspect ratio */
+.book-cover-small,
+.book-cover-hero {
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+/* Square images like child-on-potty */
+.service-preview {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
 :root {
     /* Brand Colors - PHASE 1 UPDATED */
     --british-navy: #012169;

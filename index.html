@@ -74,10 +74,36 @@
         }
     </style>
     
-    <!-- Optimized font loading - removed preloads to reduce payload -->
+    <!-- Font loading with proper fallbacks to prevent CLS -->
+    <style>
+        /* Font fallbacks with matching metrics to prevent layout shifts */
+        @font-face {
+            font-family: 'Merriweather-Fallback';
+            src: local('Georgia'), local('Times New Roman');
+            size-adjust: 106%;
+            ascent-override: 92%;
+            descent-override: normal;
+            line-gap-override: normal;
+        }
+        @font-face {
+            font-family: 'OpenSans-Fallback';
+            src: local('Arial'), local('Helvetica');
+            size-adjust: 107%;
+            ascent-override: 105%;
+            descent-override: normal;
+            line-gap-override: normal;
+        }
+        /* Use fallbacks initially */
+        body {
+            font-family: 'Open Sans', 'OpenSans-Fallback', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', 'Merriweather-Fallback', Georgia, serif;
+        }
+    </style>
     
-    <!-- Load only essential font weights to reduce payload -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Load fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <!-- Defer non-critical CSS -->
     <link rel="preload" href="assets/css/style.css?v=1.0.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -429,7 +455,7 @@
                                 <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-1-desktop.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-1-mobile.jpg">
                                 <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-1-tablet.jpg">
-                                <img src="assets/images/daycare-gallery/optimized/gallery-1-desktop.jpg" alt="The British Nanny's Daycare environment" loading="lazy">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-1-desktop.jpg" alt="The British Nanny's Daycare environment" width="800" height="600" loading="lazy">
                             </picture>
                         </div>
                         <div class="carousel-item">
@@ -439,7 +465,7 @@
                                 <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-2-desktop.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-2-mobile.jpg">
                                 <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-2-tablet.jpg">
-                                <img src="assets/images/daycare-gallery/optimized/gallery-2-desktop.jpg" alt="Children's play area at daycare" loading="lazy">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-2-desktop.jpg" alt="Children's play area at daycare" width="800" height="600" loading="lazy">
                             </picture>
                         </div>
                         <div class="carousel-item">
@@ -449,7 +475,7 @@
                                 <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-3-desktop.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-3-mobile.jpg">
                                 <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-3-tablet.jpg">
-                                <img src="assets/images/daycare-gallery/optimized/gallery-3-desktop.jpg" alt="Learning activities at The British Nanny's Daycare" loading="lazy">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-3-desktop.jpg" alt="Learning activities at The British Nanny's Daycare" width="800" height="600" loading="lazy">
                             </picture>
                         </div>
                         <div class="carousel-item">
@@ -459,7 +485,7 @@
                                 <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-4-desktop.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-4-mobile.jpg">
                                 <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-4-tablet.jpg">
-                                <img src="assets/images/daycare-gallery/optimized/gallery-4-desktop.jpg" alt="Daycare activity space" loading="lazy">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-4-desktop.jpg" alt="Daycare activity space" width="800" height="600" loading="lazy">
                             </picture>
                         </div>
                         <div class="carousel-item">
@@ -469,7 +495,7 @@
                                 <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-5-desktop.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-5-mobile.jpg">
                                 <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-5-tablet.jpg">
-                                <img src="assets/images/daycare-gallery/optimized/gallery-5-desktop.jpg" alt="British Nanny's Daycare environment" loading="lazy">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-5-desktop.jpg" alt="British Nanny's Daycare environment" width="800" height="600" loading="lazy">
                             </picture>
                         </div>
                         <div class="carousel-item">
@@ -479,95 +505,95 @@
                                 <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-6-desktop.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-6-mobile.jpg">
                                 <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-6-tablet.jpg">
-                                <img src="assets/images/daycare-gallery/optimized/gallery-6-desktop.jpg" alt="Safe childcare space in Ottawa" loading="lazy">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-6-desktop.jpg" alt="Safe childcare space in Ottawa" width="800" height="600" loading="lazy">
                             </picture>
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-7.jpg" alt="The British Nanny's Daycare facilities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-7.jpg" alt="The British Nanny's Daycare facilities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-8.jpg" alt="Professional daycare environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-8.jpg" alt="Professional daycare environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-9.jpg" alt="British Nanny's Daycare activities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-9.jpg" alt="British Nanny's Daycare activities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-10.jpg" alt="Children's educational space" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-10.jpg" alt="Children's educational space" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-11.jpg" alt="Daycare learning environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-11.jpg" alt="Daycare learning environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-12.jpg" alt="The British Nanny's play area" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-12.jpg" alt="The British Nanny's play area" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-13.jpg" alt="Nurturing daycare space" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-13.jpg" alt="Nurturing daycare space" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-14.jpg" alt="British Nanny's childcare" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-14.jpg" alt="British Nanny's childcare" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-15.jpg" alt="Daycare activities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-15.jpg" alt="Daycare activities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-16.jpg" alt="Children's play environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-16.jpg" alt="Children's play environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-17.jpg" alt="Educational daycare activities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-17.jpg" alt="Educational daycare activities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-18.jpg" alt="The British Nanny's Daycare" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-18.jpg" alt="The British Nanny's Daycare" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-19.jpg" alt="Safe daycare environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-19.jpg" alt="Safe daycare environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-20.jpg" alt="Children's activities at daycare" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-20.jpg" alt="Children's activities at daycare" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-21.jpg" alt="British Nanny's play space" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-21.jpg" alt="British Nanny's play space" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-22.jpg" alt="Daycare learning activities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-22.jpg" alt="Daycare learning activities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-23.jpg" alt="Children's educational environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-23.jpg" alt="Children's educational environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-24.jpg" alt="The British Nanny's childcare space" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-24.jpg" alt="The British Nanny's childcare space" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-25.jpg" alt="Daycare play activities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-25.jpg" alt="Daycare play activities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-26.jpg" alt="British Nanny's Daycare Ottawa" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-26.jpg" alt="British Nanny's Daycare Ottawa" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-27.jpg" alt="Children's daycare environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-27.jpg" alt="Children's daycare environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-28.jpg" alt="Educational play space" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-28.jpg" alt="Educational play space" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-29.jpg" alt="The British Nanny's facilities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-29.jpg" alt="The British Nanny's facilities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-30.jpg" alt="Daycare activity area" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-30.jpg" alt="Daycare activity area" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-31.jpg" alt="British Nanny's educational space" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-31.jpg" alt="British Nanny's educational space" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-32.jpg" alt="Children's learning environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-32.jpg" alt="Children's learning environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-33.jpg" alt="Daycare play environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-33.jpg" alt="Daycare play environment" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-34.jpg" alt="The British Nanny's Daycare activities" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-34.jpg" alt="The British Nanny's Daycare activities" width="800" height="600" loading="lazy">
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-35.jpg" alt="Professional childcare environment" loading="lazy">
+                            <img src="assets/images/daycare-gallery/gallery-35.jpg" alt="Professional childcare environment" width="800" height="600" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -605,7 +631,7 @@
                     <div class="service-image">
                         <picture>
                             <source type="image/webp" srcset="assets/images/book/optimized/child-on-potty-thumb.webp">
-                            <img src="assets/images/book/optimized/child-on-potty-thumb.jpg" alt="Child successfully using potty" class="service-preview" loading="lazy">
+                            <img src="assets/images/book/optimized/child-on-potty-thumb.jpg" alt="Child successfully using potty" class="service-preview" width="200" height="200" loading="lazy">
                         </picture>
                     </div>
                 </div>
@@ -719,7 +745,7 @@
                                 <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/book/optimized/book-cover-mobile.webp">
                                 <source type="image/webp" srcset="assets/images/book/optimized/book-cover-tablet.webp">
                                 <source media="(max-width: 480px)" srcset="assets/images/book/optimized/book-cover-mobile.jpg">
-                                <img src="assets/images/book/optimized/book-cover-tablet.jpg" alt="The British Nanny's Guide to Potty Training book cover" class="book-cover-small" loading="lazy">
+                                <img src="assets/images/book/optimized/book-cover-tablet.jpg" alt="The British Nanny's Guide to Potty Training book cover" class="book-cover-small" width="400" height="600" loading="lazy">
                             </picture>
                             <div class="book-details">
                                 <h3>Author of "The British Nanny's Guide to Potty Training"</h3>
@@ -1170,13 +1196,13 @@
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
-                    loadScript('assets/js/common.min.js?v=1.0.0');
-                    loadScript('assets/js/daycare.min.js?v=1.0.0');
+                    loadScript('assets/js/common.min.js?v=1.1.0');
+                    loadScript('assets/js/daycare.min.js?v=1.1.0');
                 }, 100);
             });
         } else {
-            loadScript('assets/js/common.min.js?v=1.0.0');
-            loadScript('assets/js/daycare.min.js?v=1.0.0');
+            loadScript('assets/js/common.min.js?v=1.1.0');
+            loadScript('assets/js/daycare.min.js?v=1.1.0');
         }
     </script>
 </body>
