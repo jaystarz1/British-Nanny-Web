@@ -37,3 +37,27 @@ build/
 *.psd
 *.ai
 *.sketch
+
+# Large original images - NEVER commit these
+assets/images/daycare-gallery/original-backup/
+assets/images/book/original-backup/
+*-original.jpg
+*-original.png
+*.jpg.bak
+*.png.bak
+
+# Prevent accidental large file commits
+*.jpg
+*.jpeg
+*.png
+!assets/images/daycare-gallery/optimized/*.jpg
+!assets/images/daycare-gallery/optimized/*.webp
+!assets/images/book/optimized/*.jpg
+!assets/images/book/optimized/*.webp
+!assets/images/daycare-gallery/gallery-[1-9].jpg
+!assets/images/daycare-gallery/gallery-[1-3][0-9].jpg
+!assets/images/book/book-cover.jpg
+!assets/images/book/child-on-potty.jpg
+!assets/images/book/outdoor-potty-scene.jpg
+!assets/images/book/book-back-cover.jpg
+!assets/images/branding/*.jpg
