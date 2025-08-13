@@ -246,6 +246,9 @@
     color: var(--dark-text);
     padding: 40px 20px;
     text-align: center;
+    /* Prevent layout shift with minimum height */
+    min-height: 280px;
+    contain: layout style;
 }
 
 .action-section .container {
@@ -264,6 +267,9 @@
     font-size: 17px;
     color: var(--dark-text);
     margin: 0;
+    /* Fixed line height to prevent shifts */
+    line-height: 1.5;
+    min-height: 26px;
 }
 
 .book-inline-link {
@@ -335,12 +341,16 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    /* Reserve minimum space */
+    min-height: 48px;
 }
 
 .rate-text {
     font-size: 15px;
     color: var(--medium-gray);
     margin: 0;
+    line-height: 1.5;
+    min-height: 23px;
 }
 
 .trust-text {
@@ -348,12 +358,15 @@
     color: var(--british-red);
     margin: 0;
     font-weight: 500;
+    line-height: 1.5;
+    min-height: 23px;
 }
 
 /* Mobile */
 @media (max-width: 767px) {
     .action-section {
         padding: 30px 20px;
+        min-height: 320px;
     }
     
     .action-buttons {

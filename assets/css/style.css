@@ -16,6 +16,19 @@ img {
     height: auto;
 }
 
+/* Layout Stability - Prevent CLS */
+html {
+    /* Prevent font-size changes from causing layout shifts */
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    /* Contain layout shifts */
+    contain: layout style;
+    min-height: 100vh;
+}
+
 /* Gallery images - maintain 4:3 aspect ratio */
 .carousel-item {
     position: relative;
@@ -386,24 +399,27 @@ a:hover {
    ========================================== */
 
 .mobile-menu-overlay {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1998;
-    transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
+    pointer-events: none;
 }
 
 .mobile-menu-overlay.active {
-    display: block;
-    background: rgba(0, 0, 0, 0.6);
+    visibility: visible;
+    opacity: 1;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    pointer-events: auto;
 }
 
 .mobile-menu {
@@ -420,6 +436,9 @@ a:hover {
     box-shadow: -2px 0 30px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
     will-change: transform;
+    /* Prevent layout shift by always being in DOM */
+    visibility: visible;
+    contain: layout style paint;
 }
 
 .mobile-menu.active {
