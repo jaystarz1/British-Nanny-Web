@@ -145,9 +145,11 @@
                 successDiv.remove();
             }, 5000);
             
-            // Scroll to success message on mobile
+            // Scroll to success message on mobile (use RAF to avoid reflow)
             if (window.innerWidth < 768) {
-                successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                requestAnimationFrame(() => {
+                    successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
             }
         }
     }
@@ -182,14 +184,14 @@
                 if (!isExpanded) {
                     this.classList.add('expanded');
                     
-                    // Scroll card into view on mobile
+                    // Scroll card into view on mobile (use RAF to avoid reflow)
                     if (window.innerWidth < 768) {
-                        setTimeout(() => {
+                        requestAnimationFrame(() => {
                             this.scrollIntoView({ 
                                 behavior: 'smooth', 
                                 block: 'center' 
                             });
-                        }, 100);
+                        });
                     }
                 }
             });
@@ -277,25 +279,43 @@
         
         testimonialGrid.parentNode.appendChild(dotsContainer);
         
-        // Update dots on scroll
-        testimonialGrid.addEventListener('scroll', () => {
-            const scrollLeft = testimonialGrid.scrollLeft;
-            const cardWidth = testimonials[0].offsetWidth + 24; // width + gap
-            const newIndex = Math.round(scrollLeft / cardWidth);
-            
-            if (newIndex !== currentIndex) {
-                updateDots(newIndex);
-                currentIndex = newIndex;
+        // Cache card width to avoid reflows
+        let cachedCardWidth = null;
+        function getCardWidth() {
+            if (cachedCardWidth === null) {
+                cachedCardWidth = testimonials[0].offsetWidth + 24; // width + gap
             }
+            return cachedCardWidth;
+        }
+        
+        // Update dots on scroll (throttled to avoid reflows)
+        let scrollTimeout;
+        testimonialGrid.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const scrollLeft = testimonialGrid.scrollLeft;
+                const cardWidth = getCardWidth();
+                const newIndex = Math.round(scrollLeft / cardWidth);
+                
+                if (newIndex !== currentIndex) {
+                    updateDots(newIndex);
+                    currentIndex = newIndex;
+                }
+            }, 50);
         }, { passive: true });
         
         function scrollToTestimonial(index) {
-            const cardWidth = testimonials[0].offsetWidth + 24;
+            const cardWidth = getCardWidth();
             testimonialGrid.scrollTo({
                 left: index * cardWidth,
                 behavior: 'smooth'
             });
         }
+        
+        // Recalculate cached width on resize
+        window.addEventListener('resize', debounce(() => {
+            cachedCardWidth = null;
+        }, 250));
         
         function updateDots(activeIndex) {
             const dots = dotsContainer.querySelectorAll('.testimonial-dot');

@@ -19,16 +19,29 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://thebritishnanny.ca/potty-training-book">
     
-    <!-- Preconnect for Performance -->
+    <!-- Performance-optimized font loading -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Preload critical font files directly -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="https://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5-fCZM.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="https://fonts.gstatic.com/s/opensans/v40/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2">
+    
+    <!-- Non-blocking font loading -->
+    <link rel="preload" as="style" 
+          href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    </noscript>
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css?v=1.1.0">
-    <link rel="stylesheet" href="assets/css/book.css?v=1.1.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=1.2.0">
+    <link rel="stylesheet" href="assets/css/book.css?v=1.2.0">
     
     <!-- CRITICAL MOBILE FIX INLINE CSS -->
     <style>
@@ -609,7 +622,7 @@
             });
         }
     </script>
-    <script src="assets/js/common.min.js?v=1.1.0"></script>
-    <script src="assets/js/book.min.js?v=1.1.0"></script>
+    <script src="assets/js/common.min.js?v=1.2.0"></script>
+    <script src="assets/js/book.min.js?v=1.2.0"></script>
 </body>
 </html>

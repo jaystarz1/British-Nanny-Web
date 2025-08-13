@@ -43,12 +43,12 @@
             mobileToggle.classList.add('active');
             mobileOverlay.style.display = 'block';
             
-            // Force reflow for animation
-            mobileOverlay.offsetHeight;
-            
+            // Use double RAF to ensure proper animation timing
             requestAnimationFrame(() => {
-                mobileOverlay.classList.add('active');
-                mobileMenu.classList.add('active');
+                requestAnimationFrame(() => {
+                    mobileOverlay.classList.add('active');
+                    mobileMenu.classList.add('active');
+                });
             });
             
             body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -137,19 +137,28 @@
             });
         }, { passive: true });
 
+        // Cache section positions to avoid reflows
+        let sectionCache = [];
+        
+        function cacheSectionPositions() {
+            const sections = document.querySelectorAll('section[id], .hero-book[id]');
+            sectionCache = Array.from(sections).map(section => ({
+                id: section.id,
+                top: section.offsetTop,
+                height: section.offsetHeight
+            }));
+        }
+        
         // Update active menu items based on scroll position
         function updateActiveMenuItemsFromScroll() {
-            const sections = document.querySelectorAll('section[id], .hero-book[id]');
             const menuLinks = mobileMenu.querySelectorAll('nav a[href^="#"]');
             const scrollPosition = window.scrollY + 100; // Offset for header
             
             let currentSection = '';
             
-            sections.forEach(section => {
-                const top = section.offsetTop;
-                const height = section.offsetHeight;
-                
-                if (scrollPosition >= top && scrollPosition < top + height) {
+            // Use cached values instead of querying DOM
+            sectionCache.forEach(section => {
+                if (scrollPosition >= section.top && scrollPosition < section.top + section.height) {
                     currentSection = '#' + section.id;
                 }
             });
@@ -161,6 +170,10 @@
                 }
             });
         }
+        
+        // Recache on resize and load
+        window.addEventListener('resize', debounce(() => cacheSectionPositions(), 250));
+        window.addEventListener('load', cacheSectionPositions);
     }
 
     // ==========================================
@@ -180,14 +193,17 @@
                 
                 const target = document.querySelector(href);
                 if (target) {
-                    const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
-                    const offset = 20; // Additional offset for breathing room
-                    
-                    const targetPosition = target.offsetTop - headerHeight - offset;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    // Batch DOM reads to avoid reflow
+                    requestAnimationFrame(() => {
+                        const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+                        const offset = 20; // Additional offset for breathing room
+                        
+                        const targetPosition = target.offsetTop - headerHeight - offset;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
                     });
                 }
             });
@@ -363,17 +379,29 @@
             }, { passive: true });
         });
         
-        // Improve tap targets on small screens
+        // Improve tap targets on small screens (batch DOM operations)
         if (window.innerWidth < 768) {
-            const smallTargets = document.querySelectorAll('a, button');
-            smallTargets.forEach(target => {
-                const rect = target.getBoundingClientRect();
-                if (rect.height < 44) {
-                    target.style.minHeight = '44px';
-                    target.style.display = 'flex';
-                    target.style.alignItems = 'center';
-                    target.style.justifyContent = 'center';
-                }
+            requestAnimationFrame(() => {
+                const smallTargets = document.querySelectorAll('a, button');
+                const updates = [];
+                
+                // Read phase - collect all measurements
+                smallTargets.forEach(target => {
+                    const rect = target.getBoundingClientRect();
+                    if (rect.height < 44) {
+                        updates.push(target);
+                    }
+                });
+                
+                // Write phase - apply all updates
+                requestAnimationFrame(() => {
+                    updates.forEach(target => {
+                        target.style.minHeight = '44px';
+                        target.style.display = 'flex';
+                        target.style.alignItems = 'center';
+                        target.style.justifyContent = 'center';
+                    });
+                });
             });
         }
     }
