@@ -21,12 +21,76 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS - Prevents render blocking */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --british-navy: #012169;
+            --british-red: #CF142B;
+            --white: #FFFFFF;
+            --dark-text: #2C3E50;
+            --font-heading: 'Merriweather', Georgia, serif;
+            --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            font-family: var(--font-body);
+            color: var(--dark-text);
+            line-height: 1.6;
+            background: var(--white);
+        }
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--british-navy) 0%, #01194d 100%);
+            color: var(--white);
+            padding: 60px 20px 50px;
+            min-height: 400px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: var(--british-red);
+            color: var(--white);
+            border: 2px solid var(--british-red);
+        }
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--british-navy);
+            line-height: 1.2;
+        }
+    </style>
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/daycare.css">
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5OeyxNV-bnrw.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/opensans/v35/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Load fonts with display swap to prevent blocking -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/daycare.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for no JavaScript -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/daycare.css">
+    </noscript>
     
     <!-- Inline Styles for Contact Section -->
     <style>
@@ -1007,8 +1071,54 @@
         </nav>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/common.js"></script>
-    <script src="assets/js/daycare.js"></script>
+    <!-- Optimized Script Loading -->
+    <script>
+        // Inline critical JavaScript for immediate functionality
+        // Navigation toggle for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            var navToggle = document.querySelector('.nav-toggle');
+            var mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            var mobileMenu = document.querySelector('.mobile-menu');
+            var mobileMenuClose = document.querySelector('.mobile-menu-close');
+            
+            if (navToggle && mobileMenu) {
+                navToggle.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.add('active');
+                    mobileMenu.classList.add('active');
+                });
+                
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+                
+                mobileMenuOverlay.addEventListener('click', function() {
+                    mobileMenuOverlay.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            }
+        });
+        
+        // Load non-critical scripts asynchronously
+        function loadScript(src) {
+            var script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            document.body.appendChild(script);
+        }
+        
+        // Load scripts after page is interactive
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    loadScript('assets/js/common.js');
+                    loadScript('assets/js/daycare.js');
+                }, 100);
+            });
+        } else {
+            loadScript('assets/js/common.js');
+            loadScript('assets/js/daycare.js');
+        }
+    </script>
 </body>
 </html>
