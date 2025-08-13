@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="/cache.manifest">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -119,13 +119,13 @@
     </noscript>
     
     <!-- Defer non-critical CSS -->
-    <link rel="preload" href="assets/css/style.css?v=1.4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="assets/css/daycare.css?v=1.4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/style.css?v=1.5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/daycare.css?v=1.5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fallback for no JavaScript -->
     <noscript>
-        <link rel="stylesheet" href="assets/css/style.css?v=1.4.0">
-        <link rel="stylesheet" href="assets/css/daycare.css?v=1.4.0">
+        <link rel="stylesheet" href="assets/css/style.css?v=1.5.0">
+        <link rel="stylesheet" href="assets/css/daycare.css?v=1.5.0">
     </noscript>
     
     <!-- Inline Styles for Contact Section -->
@@ -1159,13 +1159,28 @@
 
     <!-- Optimized Script Loading -->
     <script>
-        // Register Service Worker for caching
+        // Register Service Worker for aggressive caching
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/assets/js/service-worker.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful');
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
+                    console.log('[Service Worker] Registration successful, scope:', registration.scope);
+                    
+                    // Check for updates every hour
+                    setInterval(() => {
+                        registration.update();
+                    }, 60 * 60 * 1000);
+                    
+                    // Handle updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('[Service Worker] New version available');
+                            }
+                        });
+                    });
+                }).catch(function(err) {
+                    console.error('[Service Worker] Registration failed:', err);
                 });
             });
         }
@@ -1210,10 +1225,10 @@
         // Load measurement cache first, then other scripts
         function loadAllScripts() {
             // Load measurement cache first
-            loadScript('assets/js/measurements.min.js?v=1.4.0', function() {
+            loadScript('assets/js/measurements.min.js?v=1.5.0', function() {
                 // Then load other scripts
-                loadScript('assets/js/common.min.js?v=1.4.0');
-                loadScript('assets/js/daycare.min.js?v=1.4.0');
+                loadScript('assets/js/common.min.js?v=1.5.0');
+                loadScript('assets/js/daycare.min.js?v=1.5.0');
             });
         }
         

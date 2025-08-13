@@ -1,50 +1,43 @@
 // Service Worker for The British Nanny website
-// Implements efficient caching strategies for GitHub Pages
+// Implements aggressive caching for optimal performance on GitHub Pages
 
-const CACHE_NAME = 'british-nanny-v1.0.0';
-const RUNTIME_CACHE = 'runtime-cache-v1';
+const CACHE_VERSION = 'v1.5.0';
+const CACHE_NAME = `british-nanny-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 
-// Assets to cache on install
-const STATIC_ASSETS = [
+// Cache duration in seconds
+const CACHE_DURATIONS = {
+  images: 365 * 24 * 60 * 60,    // 1 year
+  fonts: 365 * 24 * 60 * 60,      // 1 year
+  styles: 30 * 24 * 60 * 60,      // 30 days
+  scripts: 30 * 24 * 60 * 60,     // 30 days
+  html: 60 * 60,                  // 1 hour
+  api: 5 * 60                     // 5 minutes
+};
+
+// Assets to precache on install
+const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/potty-training-book.html',
-  '/assets/css/style.css?v=1.0.0',
-  '/assets/css/daycare.css?v=1.0.0',
-  '/assets/css/book.css?v=1.0.0',
-  '/assets/js/common.js?v=1.0.0',
-  '/assets/js/daycare.js?v=1.0.0'
+  '/assets/css/style.css?v=1.4.0',
+  '/assets/css/daycare.css?v=1.4.0',
+  '/assets/css/book.css?v=1.4.0',
+  '/assets/js/measurements.min.js?v=1.4.0',
+  '/assets/js/common.min.js?v=1.4.0',
+  '/assets/js/daycare.min.js?v=1.4.0',
+  '/assets/js/book.min.js?v=1.4.0'
 ];
 
-// Cache strategies by file type
-const CACHE_STRATEGIES = {
-  // Images: Cache for 1 year
-  image: {
-    cacheName: 'images-cache-v1',
-    maxAge: 365 * 24 * 60 * 60, // 1 year in seconds
-    maxEntries: 100
-  },
-  // CSS/JS: Cache for 1 month
-  static: {
-    cacheName: 'static-cache-v1',
-    maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
-    maxEntries: 50
-  },
-  // HTML: Cache for 1 hour
-  document: {
-    cacheName: 'document-cache-v1',
-    maxAge: 60 * 60, // 1 hour in seconds
-    maxEntries: 10
-  }
-};
-
-// Install event - cache static assets
+// Install event - precache critical assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      console.log('[Service Worker] Precaching assets');
+      return cache.addAll(PRECACHE_ASSETS);
     })
   );
+  // Immediately activate
   self.skipWaiting();
 });
 
@@ -54,15 +47,15 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((cacheName) => {
-            return cacheName !== CACHE_NAME && 
-                   cacheName !== RUNTIME_CACHE &&
-                   !Object.values(CACHE_STRATEGIES).some(s => s.cacheName === cacheName);
+          .filter((name) => name.startsWith('british-nanny-') && name !== CACHE_NAME)
+          .map((name) => {
+            console.log('[Service Worker] Deleting old cache:', name);
+            return caches.delete(name);
           })
-          .map((cacheName) => caches.delete(cacheName))
       );
     })
   );
+  // Take control immediately
   self.clients.claim();
 });
 
@@ -72,69 +65,123 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   
   // Skip non-GET requests
-  if (request.method !== 'GET') return;
+  if (request.method !== 'GET') {
+    return;
+  }
   
-  // Skip cross-origin requests
-  if (url.origin !== location.origin) return;
+  // Skip cross-origin requests (except Google Fonts)
+  if (url.origin !== self.location.origin && 
+      !url.hostname.includes('fonts.googleapis.com') && 
+      !url.hostname.includes('fonts.gstatic.com')) {
+    return;
+  }
   
   // Determine cache strategy based on file type
-  let strategy;
-  if (request.destination === 'image' || /\.(jpg|jpeg|png|gif|webp|svg|ico)$/i.test(url.pathname)) {
-    strategy = CACHE_STRATEGIES.image;
-  } else if (/\.(css|js)$/i.test(url.pathname)) {
-    strategy = CACHE_STRATEGIES.static;
-  } else if (request.destination === 'document' || /\.html$/i.test(url.pathname) || url.pathname === '/') {
-    strategy = CACHE_STRATEGIES.document;
-  }
+  let cacheStrategy = getCacheStrategy(url.pathname);
   
-  if (strategy) {
-    event.respondWith(
-      caches.open(strategy.cacheName).then((cache) => {
-        return cache.match(request).then((cachedResponse) => {
-          if (cachedResponse) {
-            // Check if cached response is still valid
-            const cachedDate = new Date(cachedResponse.headers.get('sw-cache-date') || 0);
-            const now = new Date();
-            const age = (now - cachedDate) / 1000; // age in seconds
-            
-            if (age < strategy.maxAge) {
-              // Return cached response if still valid
-              return cachedResponse;
-            }
-          }
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        const cachedTime = cachedResponse.headers.get('sw-cache-time');
+        if (cachedTime) {
+          const age = (Date.now() - parseInt(cachedTime)) / 1000;
+          const maxAge = getMaxAge(url.pathname);
           
-          // Fetch from network and update cache
-          return fetch(request).then((networkResponse) => {
-            // Clone the response before caching
-            const responseToCache = networkResponse.clone();
-            
-            // Add cache date header
-            const headers = new Headers(responseToCache.headers);
-            headers.set('sw-cache-date', new Date().toISOString());
-            
-            const modifiedResponse = new Response(responseToCache.body, {
-              status: responseToCache.status,
-              statusText: responseToCache.statusText,
-              headers: headers
-            });
-            
-            // Update cache
-            cache.put(request, modifiedResponse);
-            
-            return networkResponse;
-          }).catch(() => {
-            // If network fails, return cached response (if any)
-            return cachedResponse || new Response('Offline', { status: 503 });
+          // Return cached if still fresh
+          if (age < maxAge) {
+            return cachedResponse;
+          }
+        }
+      }
+      
+      // Fetch fresh and cache
+      return fetch(request).then((response) => {
+        // Only cache successful responses
+        if (!response || response.status !== 200 || response.type === 'opaque') {
+          return response;
+        }
+        
+        // Clone the response
+        const responseToCache = response.clone();
+        
+        // Add cache timestamp
+        caches.open(RUNTIME_CACHE).then((cache) => {
+          const headers = new Headers(responseToCache.headers);
+          headers.append('sw-cache-time', Date.now().toString());
+          
+          const modifiedResponse = new Response(responseToCache.body, {
+            status: responseToCache.status,
+            statusText: responseToCache.statusText,
+            headers: headers
           });
+          
+          cache.put(request, modifiedResponse);
         });
-      })
-    );
-  }
+        
+        return response;
+      }).catch(() => {
+        // If offline and we have a cached version, return it
+        return cachedResponse || new Response('Offline', {
+          status: 503,
+          statusText: 'Service Unavailable'
+        });
+      });
+    })
+  );
 });
 
-// Message event - handle cache updates
+// Helper function to determine cache strategy
+function getCacheStrategy(pathname) {
+  // Images
+  if (/\.(jpg|jpeg|png|gif|webp|svg|ico)$/i.test(pathname)) {
+    return 'images';
+  }
+  
+  // Fonts
+  if (/\.(woff|woff2|ttf|otf|eot)$/i.test(pathname)) {
+    return 'fonts';
+  }
+  
+  // Styles
+  if (/\.css$/i.test(pathname)) {
+    return 'styles';
+  }
+  
+  // Scripts
+  if (/\.js$/i.test(pathname)) {
+    return 'scripts';
+  }
+  
+  // HTML
+  if (/\.html$/i.test(pathname) || pathname === '/' || pathname === '') {
+    return 'html';
+  }
+  
+  // Default
+  return 'api';
+}
+
+// Helper function to get max age for cache type
+function getMaxAge(pathname) {
+  const strategy = getCacheStrategy(pathname);
+  return CACHE_DURATIONS[strategy] || CACHE_DURATIONS.api;
+}
+
+// Listen for messages from clients
 self.addEventListener('message', (event) => {
-  if (event.data === 'skipWaiting') {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  }
+  
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    event.waitUntil(
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => caches.delete(cacheName))
+        );
+      }).then(() => {
+        event.ports[0].postMessage({ type: 'CACHE_CLEARED' });
+      })
+    );
   }
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="/cache.manifest">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,8 +40,8 @@
     </noscript>
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css?v=1.4.0">
-    <link rel="stylesheet" href="assets/css/book.css?v=1.4.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=1.5.0">
+    <link rel="stylesheet" href="assets/css/book.css?v=1.5.0">
     
     <!-- CRITICAL MOBILE FIX INLINE CSS -->
     <style>
@@ -611,19 +611,34 @@
 
     <!-- Scripts -->
     <script>
-        // Register Service Worker for caching
+        // Register Service Worker for aggressive caching
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/assets/js/service-worker.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful');
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
+                    console.log('[Service Worker] Registration successful, scope:', registration.scope);
+                    
+                    // Check for updates every hour
+                    setInterval(() => {
+                        registration.update();
+                    }, 60 * 60 * 1000);
+                    
+                    // Handle updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('[Service Worker] New version available');
+                            }
+                        });
+                    });
+                }).catch(function(err) {
+                    console.error('[Service Worker] Registration failed:', err);
                 });
             });
         }
     </script>
-    <script src="assets/js/measurements.min.js?v=1.4.0"></script>
-    <script src="assets/js/common.min.js?v=1.4.0"></script>
-    <script src="assets/js/book.min.js?v=1.4.0"></script>
+    <script src="assets/js/measurements.min.js?v=1.5.0"></script>
+    <script src="assets/js/common.min.js?v=1.5.0"></script>
+    <script src="assets/js/book.min.js?v=1.5.0"></script>
 </body>
 </html>
