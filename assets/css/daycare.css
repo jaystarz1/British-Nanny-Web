@@ -246,9 +246,11 @@
     color: var(--dark-text);
     padding: 40px 20px;
     text-align: center;
-    /* Prevent layout shift with minimum height */
-    min-height: 280px;
-    contain: layout style;
+    /* Precise dimensions to prevent any layout shift */
+    min-height: 320px;
+    contain: layout style paint;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 320px;
 }
 
 .action-section .container {
@@ -267,9 +269,10 @@
     font-size: 17px;
     color: var(--dark-text);
     margin: 0;
-    /* Fixed line height to prevent shifts */
-    line-height: 1.5;
+    /* Exact line height to prevent shifts */
+    line-height: 26px;
     min-height: 26px;
+    display: block;
 }
 
 .book-inline-link {
@@ -277,6 +280,9 @@
     font-weight: 600;
     text-decoration: underline;
     transition: color 0.3s ease;
+    /* Prevent layout shifts */
+    display: inline-block;
+    line-height: 1.5;
 }
 
 .book-inline-link:hover {
@@ -288,6 +294,8 @@
     gap: 15px;
     justify-content: center;
     flex-wrap: wrap;
+    /* Reserve space for buttons */
+    min-height: 60px;
 }
 
 /* Button styles - consolidated */
@@ -366,7 +374,8 @@
 @media (max-width: 767px) {
     .action-section {
         padding: 30px 20px;
-        min-height: 320px;
+        min-height: 380px;
+        contain-intrinsic-size: auto 380px;
     }
     
     .action-buttons {

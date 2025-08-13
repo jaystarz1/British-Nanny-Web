@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version 1.5.0
+# Version 1.6.0
 # Last updated: 2025-08-13
 
 CACHE:
@@ -8,15 +8,15 @@ CACHE:
 /potty-training-book.html
 
 # CSS Files
-/assets/css/style.css?v=1.5.0
-/assets/css/daycare.css?v=1.5.0
-/assets/css/book.css?v=1.5.0
+/assets/css/style.css?v=1.6.0
+/assets/css/daycare.css?v=1.6.0
+/assets/css/book.css?v=1.6.0
 
 # JavaScript Files
-/assets/js/measurements.min.js?v=1.5.0
-/assets/js/common.min.js?v=1.5.0
-/assets/js/daycare.min.js?v=1.5.0
-/assets/js/book.min.js?v=1.5.0
+/assets/js/measurements.min.js?v=1.6.0
+/assets/js/common.min.js?v=1.6.0
+/assets/js/daycare.min.js?v=1.6.0
+/assets/js/book.min.js?v=1.6.0
 /assets/js/service-worker.js
 
 # Images - Critical

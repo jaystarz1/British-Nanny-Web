@@ -1,7 +1,7 @@
 // Service Worker for The British Nanny website
 // Implements aggressive caching for optimal performance on GitHub Pages
 
-const CACHE_VERSION = 'v1.5.0';
+const CACHE_VERSION = 'v1.6.0';
 const CACHE_NAME = `british-nanny-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 
@@ -20,13 +20,13 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/potty-training-book.html',
-  '/assets/css/style.css?v=1.4.0',
-  '/assets/css/daycare.css?v=1.4.0',
-  '/assets/css/book.css?v=1.4.0',
-  '/assets/js/measurements.min.js?v=1.4.0',
-  '/assets/js/common.min.js?v=1.4.0',
-  '/assets/js/daycare.min.js?v=1.4.0',
-  '/assets/js/book.min.js?v=1.4.0'
+  '/assets/css/style.css?v=1.6.0',
+  '/assets/css/daycare.css?v=1.6.0',
+  '/assets/css/book.css?v=1.6.0',
+  '/assets/js/measurements.min.js?v=1.6.0',
+  '/assets/js/common.min.js?v=1.6.0',
+  '/assets/js/daycare.min.js?v=1.6.0',
+  '/assets/js/book.min.js?v=1.6.0'
 ];
 
 // Install event - precache critical assets

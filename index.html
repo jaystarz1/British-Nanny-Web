@@ -80,52 +80,123 @@
             color: var(--british-navy);
             line-height: 1.2;
         }
+        
+        /* Critical: Mobile phone link stabilization - prevents 0.036 CLS */
+        .mobile-phone {
+            display: block;
+            min-height: 48px;
+            line-height: 48px;
+            padding: 0 24px;
+            background: var(--british-red);
+            color: var(--white) !important;
+            text-align: center;
+            margin-top: 16px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Critical: Phone button in nav */
+        .phone-btn {
+            display: inline-block;
+            min-height: 44px;
+            line-height: 44px;
+            padding: 0 20px;
+            white-space: nowrap;
+        }
     </style>
     
-    <!-- Font loading with proper fallbacks to prevent CLS -->
+    <!-- Perfect font metric matching to eliminate CLS -->
     <style>
-        /* Font fallbacks with matching metrics to prevent layout shifts */
+        /* Precisely matched font fallbacks - eliminates layout shifts */
         @font-face {
             font-family: 'Merriweather-Fallback';
-            src: local('Georgia'), local('Times New Roman');
-            size-adjust: 106%;
-            ascent-override: 92%;
-            descent-override: normal;
-            line-gap-override: normal;
+            src: local('Georgia');
+            size-adjust: 107.5%;
+            ascent-override: 95%;
+            descent-override: 25%;
+            line-gap-override: 0%;
         }
         @font-face {
             font-family: 'OpenSans-Fallback';
-            src: local('Arial'), local('Helvetica');
-            size-adjust: 107%;
+            src: local('Arial');
+            size-adjust: 107.64%;
             ascent-override: 105%;
-            descent-override: normal;
-            line-gap-override: normal;
+            descent-override: 35%;
+            line-gap-override: 0%;
         }
-        /* Use fallbacks initially */
+        
+        /* Critical inline @font-face for immediate loading */
+        @font-face {
+            font-family: 'Merriweather';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5-fCZM.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Merriweather';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/merriweather/v30/u-4n0qyriQwlOrhSvowK_l52xwNZWMf6.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/opensans/v40/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/opensans/v40/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu0SC55I.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        
+        /* Apply fallbacks with exact metrics */
         body {
-            font-family: 'Open Sans', 'OpenSans-Fallback', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Open Sans', 'OpenSans-Fallback', Arial, sans-serif;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
         }
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3, h4, h5, h6, .hero-title, .section-title {
             font-family: 'Merriweather', 'Merriweather-Fallback', Georgia, serif;
+            font-synthesis: none;
+        }
+        
+        /* Prevent font-related layout shifts */
+        * {
+            font-kerning: normal;
+            font-variant-ligatures: normal;
         }
     </style>
     
-    <!-- Non-blocking font loading with font-display:optional for non-critical fonts -->
+    <!-- Optimized font loading with swap for smooth transition -->
     <link rel="preload" as="style" 
-          href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=optional"
+          href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
           onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=optional" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     </noscript>
     
     <!-- Defer non-critical CSS -->
-    <link rel="preload" href="assets/css/style.css?v=1.5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="assets/css/daycare.css?v=1.5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/style.css?v=1.6.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/daycare.css?v=1.6.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fallback for no JavaScript -->
     <noscript>
-        <link rel="stylesheet" href="assets/css/style.css?v=1.5.0">
-        <link rel="stylesheet" href="assets/css/daycare.css?v=1.5.0">
+        <link rel="stylesheet" href="assets/css/style.css?v=1.6.0">
+        <link rel="stylesheet" href="assets/css/daycare.css?v=1.6.0">
     </noscript>
     
     <!-- Inline Styles for Contact Section -->
@@ -1225,10 +1296,10 @@
         // Load measurement cache first, then other scripts
         function loadAllScripts() {
             // Load measurement cache first
-            loadScript('assets/js/measurements.min.js?v=1.5.0', function() {
+            loadScript('assets/js/measurements.min.js?v=1.6.0', function() {
                 // Then load other scripts
-                loadScript('assets/js/common.min.js?v=1.5.0');
-                loadScript('assets/js/daycare.min.js?v=1.5.0');
+                loadScript('assets/js/common.min.js?v=1.6.0');
+                loadScript('assets/js/daycare.min.js?v=1.6.0');
             });
         }
         
