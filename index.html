@@ -74,22 +74,20 @@
         }
     </style>
     
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5OeyxNV-bnrw.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/opensans/v35/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Optimized font loading - removed preloads to reduce payload -->
     
-    <!-- Load fonts with display swap to prevent blocking -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Load only essential font weights to reduce payload -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <!-- Defer non-critical CSS -->
-    <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="assets/css/daycare.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/style.css?v=1.0.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="assets/css/daycare.css?v=1.0.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Fallback for no JavaScript -->
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/daycare.css">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css?v=1.0.0">
+        <link rel="stylesheet" href="assets/css/daycare.css?v=1.0.0">
     </noscript>
     
     <!-- Inline Styles for Contact Section -->
@@ -425,22 +423,64 @@
                     <div class="carousel-track">
                         <!-- Gallery Items - ALL 35 IMAGES! -->
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-1.jpg" alt="The British Nanny's Daycare environment" loading="lazy">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-1-mobile.webp">
+                                <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-1-tablet.webp">
+                                <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-1-desktop.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-1-mobile.jpg">
+                                <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-1-tablet.jpg">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-1-desktop.jpg" alt="The British Nanny's Daycare environment" loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-2.jpg" alt="Children's play area at daycare" loading="lazy">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-2-mobile.webp">
+                                <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-2-tablet.webp">
+                                <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-2-desktop.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-2-mobile.jpg">
+                                <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-2-tablet.jpg">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-2-desktop.jpg" alt="Children's play area at daycare" loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-3.jpg" alt="Learning activities at The British Nanny's Daycare" loading="lazy">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-3-mobile.webp">
+                                <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-3-tablet.webp">
+                                <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-3-desktop.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-3-mobile.jpg">
+                                <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-3-tablet.jpg">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-3-desktop.jpg" alt="Learning activities at The British Nanny's Daycare" loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-4.jpg" alt="Daycare activity space" loading="lazy">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-4-mobile.webp">
+                                <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-4-tablet.webp">
+                                <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-4-desktop.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-4-mobile.jpg">
+                                <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-4-tablet.jpg">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-4-desktop.jpg" alt="Daycare activity space" loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-5.jpg" alt="British Nanny's Daycare environment" loading="lazy">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-5-mobile.webp">
+                                <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-5-tablet.webp">
+                                <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-5-desktop.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-5-mobile.jpg">
+                                <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-5-tablet.jpg">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-5-desktop.jpg" alt="British Nanny's Daycare environment" loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-item">
-                            <img src="assets/images/daycare-gallery/gallery-6.jpg" alt="Safe childcare space in Ottawa" loading="lazy">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-6-mobile.webp">
+                                <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-6-tablet.webp">
+                                <source type="image/webp" srcset="assets/images/daycare-gallery/optimized/gallery-6-desktop.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/daycare-gallery/optimized/gallery-6-mobile.jpg">
+                                <source media="(max-width: 768px)" srcset="assets/images/daycare-gallery/optimized/gallery-6-tablet.jpg">
+                                <img src="assets/images/daycare-gallery/optimized/gallery-6-desktop.jpg" alt="Safe childcare space in Ottawa" loading="lazy">
+                            </picture>
                         </div>
                         <div class="carousel-item">
                             <img src="assets/images/daycare-gallery/gallery-7.jpg" alt="The British Nanny's Daycare facilities" loading="lazy">
@@ -563,7 +603,10 @@
                     <h3>Expert Potty Training</h3>
                     <p>Using proven methods from my published guide, I've successfully potty trained dozens of children with patience and positivity.</p>
                     <div class="service-image">
-                        <img src="assets/images/book/child-on-potty.jpg" alt="Child successfully using potty" class="service-preview">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/book/optimized/child-on-potty-thumb.webp">
+                            <img src="assets/images/book/optimized/child-on-potty-thumb.jpg" alt="Child successfully using potty" class="service-preview" loading="lazy">
+                        </picture>
                     </div>
                 </div>
                 
@@ -672,7 +715,12 @@
                 <div class="qualification-card">
                     <div class="card-content">
                         <div class="book-showcase-top-simple">
-                            <img src="assets/images/book/book-cover.jpg" alt="The British Nanny's Guide to Potty Training book cover" class="book-cover-small">
+                            <picture>
+                                <source type="image/webp" media="(max-width: 480px)" srcset="assets/images/book/optimized/book-cover-mobile.webp">
+                                <source type="image/webp" srcset="assets/images/book/optimized/book-cover-tablet.webp">
+                                <source media="(max-width: 480px)" srcset="assets/images/book/optimized/book-cover-mobile.jpg">
+                                <img src="assets/images/book/optimized/book-cover-tablet.jpg" alt="The British Nanny's Guide to Potty Training book cover" class="book-cover-small" loading="lazy">
+                            </picture>
                             <div class="book-details">
                                 <h3>Author of "The British Nanny's Guide to Potty Training"</h3>
                                 <p>Available on Amazon worldwide</p>
@@ -1073,6 +1121,17 @@
 
     <!-- Optimized Script Loading -->
     <script>
+        // Register Service Worker for caching
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/assets/js/service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+        
         // Inline critical JavaScript for immediate functionality
         // Navigation toggle for mobile
         document.addEventListener('DOMContentLoaded', function() {
@@ -1111,13 +1170,13 @@
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
-                    loadScript('assets/js/common.js');
-                    loadScript('assets/js/daycare.js');
+                    loadScript('assets/js/common.min.js?v=1.0.0');
+                    loadScript('assets/js/daycare.min.js?v=1.0.0');
                 }, 100);
             });
         } else {
-            loadScript('assets/js/common.js');
-            loadScript('assets/js/daycare.js');
+            loadScript('assets/js/common.min.js?v=1.0.0');
+            loadScript('assets/js/daycare.min.js?v=1.0.0');
         }
     </script>
 </body>

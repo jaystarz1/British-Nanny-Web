@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         lastScroll = currentScroll;
-    });
+    }, { passive: true });
 });
 
 // Function to update navigation for current page

@@ -24,11 +24,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css?v=2.1">
-    <link rel="stylesheet" href="assets/css/book.css?v=2.1">
+    <link rel="stylesheet" href="assets/css/style.css?v=1.0.0">
+    <link rel="stylesheet" href="assets/css/book.css?v=1.0.0">
     
     <!-- CRITICAL MOBILE FIX INLINE CSS -->
     <style>
@@ -209,7 +209,12 @@
                 </div>
                 
                 <div class="hero-image">
-                    <img src="assets/images/book/book-cover.jpg" alt="The British Nanny's Guide to Potty Training Book Cover" class="book-cover-hero">
+                    <picture>
+                        <source type="image/webp" media="(max-width: 768px)" srcset="assets/images/book/optimized/book-cover-mobile.webp">
+                        <source type="image/webp" srcset="assets/images/book/optimized/book-cover-tablet.webp">
+                        <source media="(max-width: 768px)" srcset="assets/images/book/optimized/book-cover-mobile.jpg">
+                        <img src="assets/images/book/optimized/book-cover-tablet.jpg" alt="The British Nanny's Guide to Potty Training Book Cover" class="book-cover-hero">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -592,7 +597,19 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/common.js"></script>
-    <script src="assets/js/book.js"></script>
+    <script>
+        // Register Service Worker for caching
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/assets/js/service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    <script src="assets/js/common.min.js?v=1.0.0"></script>
+    <script src="assets/js/book.min.js?v=1.0.0"></script>
 </body>
 </html>

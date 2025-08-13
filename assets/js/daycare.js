@@ -287,7 +287,7 @@
                 updateDots(newIndex);
                 currentIndex = newIndex;
             }
-        });
+        }, { passive: true });
         
         function scrollToTestimonial(index) {
             const cardWidth = testimonials[0].offsetWidth + 24;

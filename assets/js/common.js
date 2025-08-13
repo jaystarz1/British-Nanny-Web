@@ -135,7 +135,7 @@
                     updateActiveMenuItemsFromScroll();
                 }
             });
-        });
+        }, { passive: true });
 
         // Update active menu items based on scroll position
         function updateActiveMenuItemsFromScroll() {
@@ -352,15 +352,15 @@
         touchElements.forEach(el => {
             el.addEventListener('touchstart', function() {
                 this.style.transform = 'scale(0.98)';
-            });
+            }, { passive: true });
             
             el.addEventListener('touchend', function() {
                 this.style.transform = '';
-            });
+            }, { passive: true });
             
             el.addEventListener('touchcancel', function() {
                 this.style.transform = '';
-            });
+            }, { passive: true });
         });
         
         // Improve tap targets on small screens
