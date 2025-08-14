@@ -85,6 +85,7 @@
         .mobile-phone {
             display: block;
             min-height: 48px;
+            height: 48px;  /* Fixed height prevents CLS */
             line-height: 48px;
             padding: 0 24px;
             background: var(--british-red);
@@ -97,18 +98,43 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            contain: layout style;  /* Prevent layout shifts */
+            contain: layout style paint;  /* Full containment prevents layout shifts */
             width: 100%;
             box-sizing: border-box;
+            font-size: 16px;  /* Explicit font size */
         }
         
         /* Critical: Phone button in nav */
         .phone-btn {
             display: inline-block;
             min-height: 44px;
+            height: 44px;  /* Fixed height prevents CLS */
             line-height: 44px;
             padding: 0 20px;
             white-space: nowrap;
+            contain: layout style;
+            font-size: 16px;  /* Explicit font size */
+        }
+        
+        /* Critical: Container stabilization */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            contain: layout style;  /* Prevent layout shifts */
+            min-height: 1px;  /* Ensures container has height */
+        }
+        
+        /* Critical: Action section stabilization */
+        .action-section {
+            min-height: 320px;
+            contain: layout style paint;
+        }
+        
+        @media (max-width: 767px) {
+            .action-section {
+                min-height: 380px;
+            }
         }
     </style>
     
