@@ -324,7 +324,7 @@
                     <span class="fab-icon">📞</span>
                     <span class="fab-label">Call Now</span>
                 </a>
-                <a href="mailto:thebritishnanny@gmail.com" class="fab-action email">
+                <a href="mailto:thebritishnanny2@gmail.com" class="fab-action email">
                     <span class="fab-icon">✉️</span>
                     <span class="fab-label">Email Us</span>
                 </a>
