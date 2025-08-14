@@ -1,0 +1,78 @@
+# Netlify _headers file for cache control
+# This file works on Netlify hosting
+
+# Images - 1 year cache
+/assets/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.gif
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts - 1 year cache
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.otf
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.eot
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS - 30 days cache
+/assets/css/*
+  Cache-Control: public, max-age=2592000
+
+/*.css
+  Cache-Control: public, max-age=2592000
+
+# JavaScript - 30 days cache
+/assets/js/*
+  Cache-Control: public, max-age=2592000
+
+/*.js
+  Cache-Control: public, max-age=2592000
+
+# Service Worker - no cache
+/service-worker.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/assets/js/service-worker.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# HTML - 1 hour cache
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Security headers for all paths
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin

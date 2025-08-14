@@ -250,12 +250,13 @@
     min-height: 320px;
     contain: layout style paint;
     content-visibility: auto;
-    contain-intrinsic-size: auto 320px;
+    contain-intrinsic-size: 1200px 320px;  /* Fixed width to prevent CLS */
 }
 
 .action-section .container {
     max-width: 1200px;
     margin: 0 auto;
+    contain: layout style;  /* Prevent layout shifts */
 }
 
 .action-content {

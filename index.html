@@ -17,11 +17,11 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://thebritishnanny.ca/">
     
-    <!-- Performance-optimized font loading -->
+    <!-- Preconnect hints MUST be early in head for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Preload critical font files directly -->
     <link rel="preload" as="font" type="font/woff2" crossorigin
@@ -81,7 +81,7 @@
             line-height: 1.2;
         }
         
-        /* Critical: Mobile phone link stabilization - prevents 0.036 CLS */
+        /* Critical: Mobile phone link stabilization - prevents CLS */
         .mobile-phone {
             display: block;
             min-height: 48px;
@@ -97,6 +97,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            contain: layout style;  /* Prevent layout shifts */
+            width: 100%;
+            box-sizing: border-box;
         }
         
         /* Critical: Phone button in nav */
