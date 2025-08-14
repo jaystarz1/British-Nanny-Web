@@ -355,7 +355,7 @@
 
 .rate-text {
     font-size: 15px;
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
     margin: 0;
     line-height: 1.5;
     min-height: 23px;
@@ -834,7 +834,7 @@
 }
 
 .curriculum-item p {
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
     font-size: 13px;
     line-height: 1.4;
     margin: 0;
@@ -1044,7 +1044,7 @@
 
 .section-subtitle {
     font-size: 18px;
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
     margin-bottom: 40px;
     text-align: center;
 }
@@ -1094,7 +1094,7 @@
 }
 
 .service-card p {
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
     line-height: 1.6;
     font-size: 15px;
     margin: 0;
@@ -1666,7 +1666,7 @@
 }
 
 .testimonial-role {
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
     font-size: 0.85rem;
     margin-top: var(--spacing-xs);
 }
@@ -2336,7 +2336,7 @@
 
 .stat-label {
     font-size: 0.875rem;
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
 }
 
 /* Tablet Quick Stats */

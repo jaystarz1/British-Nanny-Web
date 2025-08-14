@@ -90,7 +90,7 @@ footer {
     --british-red: #CF142B;
     --white: #FFFFFF;
     --light-gray: #F8F9FA;
-    --medium-gray: #6C757D;
+    --medium-gray: #4A5056;  /* Updated from #6C757D for WCAG AA contrast (4.5:1 minimum) */
     --dark-text: #2C3E50;
     --accent-gold: #FFD700;
     
@@ -753,7 +753,7 @@ section {
 .section-subtitle {
     text-align: center;
     font-size: 1.125rem;
-    color: var(--medium-gray);
+    color: var(--dark-text);  /* Changed for better contrast */
     margin-bottom: var(--spacing-xl);
     padding: 0 var(--spacing-md);
     max-width: 50ch;
