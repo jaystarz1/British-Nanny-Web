@@ -1,7 +1,7 @@
 // Service Worker for The British Nanny website
 // Implements aggressive caching for optimal performance on GitHub Pages
 
-const CACHE_VERSION = 'v1.6.0';
+const CACHE_VERSION = 'v1.6.2';
 const CACHE_NAME = `british-nanny-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 
@@ -15,18 +15,22 @@ const CACHE_DURATIONS = {
   api: 5 * 60                     // 5 minutes
 };
 
-// Assets to precache on install
+// Assets to precache on install - Updated versions
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/potty-training-book.html',
-  '/assets/css/style.css?v=1.6.0',
-  '/assets/css/daycare.css?v=1.6.0',
-  '/assets/css/book.css?v=1.6.0',
+  '/assets/css/style.min.css?v=1.6.1',
+  '/assets/css/daycare.min.css?v=1.6.1',
+  '/assets/css/book.min.css?v=1.6.1',
   '/assets/js/measurements.min.js?v=1.6.0',
   '/assets/js/common.min.js?v=1.6.0',
   '/assets/js/daycare.min.js?v=1.6.0',
-  '/assets/js/book.min.js?v=1.6.0'
+  '/assets/js/book.min.js?v=1.6.0',
+  // Preload critical images
+  '/assets/images/daycare-gallery/optimized/gallery-1-mobile.webp',
+  '/assets/images/daycare-gallery/optimized/gallery-2-mobile.webp',
+  '/assets/images/daycare-gallery/optimized/gallery-3-mobile.webp'
 ];
 
 // Install event - precache critical assets
@@ -89,6 +93,37 @@ self.addEventListener('fetch', (event) => {
           
           // Return cached if still fresh
           if (age < maxAge) {
+            // For images and fonts, update in background but return cached immediately
+            if (getCacheStrategy(url.pathname) === 'images' || getCacheStrategy(url.pathname) === 'fonts') {
+              fetch(request).then((response) => {
+                if (response && response.status === 200) {
+                  caches.open(RUNTIME_CACHE).then((cache) => {
+                    cache.put(request, response.clone());
+                  });
+                }
+              }).catch(() => {});
+            }
+            return cachedResponse;
+          }
+        } else {
+          // No cache time header, but we have a cached response
+          // For static assets, return it and update in background
+          const strategy = getCacheStrategy(url.pathname);
+          if (strategy === 'images' || strategy === 'fonts' || strategy === 'styles' || strategy === 'scripts') {
+            fetch(request).then((response) => {
+              if (response && response.status === 200) {
+                caches.open(RUNTIME_CACHE).then((cache) => {
+                  const headers = new Headers(response.headers);
+                  headers.append('sw-cache-time', Date.now().toString());
+                  const modifiedResponse = new Response(response.body, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: headers
+                  });
+                  cache.put(request, modifiedResponse);
+                });
+              }
+            }).catch(() => {});
             return cachedResponse;
           }
         }

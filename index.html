@@ -1276,12 +1276,18 @@
         </nav>
     </div>
 
+    <!-- Preload critical gallery images -->
+    <link rel="prefetch" href="assets/images/daycare-gallery/optimized/gallery-1-mobile.webp">
+    <link rel="prefetch" href="assets/images/daycare-gallery/optimized/gallery-2-mobile.webp">
+    <link rel="prefetch" href="assets/images/daycare-gallery/optimized/gallery-3-mobile.webp">
+    <link rel="prefetch" href="assets/images/daycare-gallery/optimized/gallery-4-mobile.webp">
+    
     <!-- Optimized Script Loading -->
     <script>
-        // Register Service Worker for aggressive caching
+        // Register Service Worker immediately for aggressive caching (v1.6.2)
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/assets/js/service-worker.js').then(function(registration) {
+            // Don't wait for load event - register immediately
+            navigator.serviceWorker.register('/assets/js/service-worker.js').then(function(registration) {
                     console.log('[Service Worker] Registration successful, scope:', registration.scope);
                     
                     // Check for updates every hour
