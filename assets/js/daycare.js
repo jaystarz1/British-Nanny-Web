@@ -251,37 +251,7 @@
             `;
         });
         
-        // Add dots indicator
-        const dotsContainer = document.createElement('div');
-        dotsContainer.className = 'testimonial-dots';
-        dotsContainer.style.cssText = `
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            margin-top: var(--spacing-lg);
-        `;
-        
-        for (let i = 0; i < totalTestimonials; i++) {
-            const dot = document.createElement('button');
-            dot.className = 'testimonial-dot';
-            dot.style.cssText = `
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                border: none;
-                background: ${i === 0 ? 'var(--british-red)' : 'var(--medium-gray)'};
-                cursor: pointer;
-                transition: background 0.3s ease;
-            `;
-            
-            dot.addEventListener('click', () => {
-                scrollToTestimonial(i);
-            });
-            
-            dotsContainer.appendChild(dot);
-        }
-        
-        testimonialGrid.parentNode.appendChild(dotsContainer);
+        // Removed testimonial dots for accessibility - using swipe navigation only
         
         // Use measurement cache to avoid reflows
         function getCardWidth() {
@@ -296,47 +266,8 @@
             return testimonials[0].offsetWidth + 24;
         }
         
-        // Update dots on scroll (optimized to prevent reflows)
-        let scrollTimeout;
-        let lastScrollLeft = 0;
-        
-        testimonialGrid.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                // Use RAF to batch DOM reads
-                requestAnimationFrame(() => {
-                    const scrollLeft = testimonialGrid.scrollLeft;
-                    // Only proceed if scroll actually changed
-                    if (Math.abs(scrollLeft - lastScrollLeft) > 5) {
-                        lastScrollLeft = scrollLeft;
-                        const cardWidth = getCardWidth();
-                        const newIndex = Math.round(scrollLeft / cardWidth);
-                        
-                        if (newIndex !== currentIndex) {
-                            updateDots(newIndex);
-                            currentIndex = newIndex;
-                        }
-                    }
-                });
-            }, 50);
-        }, { passive: true });
-        
-        function scrollToTestimonial(index) {
-            const cardWidth = getCardWidth();
-            testimonialGrid.scrollTo({
-                left: index * cardWidth,
-                behavior: 'smooth'
-            });
-        }
-        
-        // Cache will auto-update on resize via MeasurementCache
-        
-        function updateDots(activeIndex) {
-            const dots = dotsContainer.querySelectorAll('.testimonial-dot');
-            dots.forEach((dot, index) => {
-                dot.style.background = index === activeIndex ? 'var(--british-red)' : 'var(--medium-gray)';
-            });
-        }
+        // Scroll tracking removed - no longer needed without dots
+        // Testimonials use native swipe scrolling with scroll-snap
     }
 
     // ==========================================
