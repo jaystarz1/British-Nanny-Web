@@ -70,7 +70,7 @@ thebritishnanny.ca/
 1. **40+ Years Experience** in professional childcare
 2. **NNEB Certification** from Mable Fletcher College, Liverpool (1981)
 3. **Published Author** on potty training
-4. **Allergy Specialist** (EpiPen trained, nut-free facility)
+4. **Allergy Specialist** (Will administer EpiPen if authorized, nut-free facility)
 5. **British Early Years Curriculum** with Canadian warmth
 6. **Screen-Free Environment** for authentic childhood
 7. **Small Group Setting** (maximum 5 children)
