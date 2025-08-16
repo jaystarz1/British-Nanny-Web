@@ -519,47 +519,79 @@ a:hover {
     background: var(--light-gray);
 }
 
+/* Mobile Menu - Unified Styling */
 .mobile-menu nav {
-    padding: var(--spacing-xxl) var(--spacing-lg) var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    text-align: center;
+    gap: 4px;
+    padding: 16px;
 }
 
 .mobile-menu nav a {
-    font-size: 1.125rem;
-    font-weight: 600;
-    padding: var(--spacing-md);
+    display: block;
+    padding: 16px 20px;
+    min-height: 48px;
+    background: white;
+    color: #012169;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
     border-radius: 8px;
-    background: var(--light-gray);
-    transition: var(--transition);
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
 }
 
-.mobile-menu nav a:hover {
-    background: var(--british-navy);
-    color: var(--white);
-    transform: translateX(-5px);
+.mobile-menu nav a:active {
+    background: #012169;
+    color: white;
+    transform: scale(0.98);
+}
+
+/* Resources Section */
+.mobile-resources {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 8px 0;
+}
+
+.mobile-resources-header {
+    font-weight: 600;
+    color: #012169;
+    margin-bottom: 8px;
+    padding: 0 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mobile-resources a {
+    background: white;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.mobile-resources a:last-child {
+    margin-bottom: 0;
+}
+
+/* Phone Button Special Styling */
+.mobile-phone {
+    background: #CF142B !important;
+    color: white !important;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 8px;
+    justify-content: center;
 }
 
 /* Active state for current section */
 .mobile-menu nav a.active {
-    background: var(--british-navy);
-    color: var(--white);
-    position: relative;
-    font-weight: 700;
-}
-
-.mobile-menu nav a.active::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 60%;
-    background: var(--british-red);
-    border-radius: 0 2px 2px 0;
+    background: #012169;
+    color: white;
+    font-weight: 600;
 }
 
 /* Fix for resource submenu - MORE SPECIFIC selector */
