@@ -68,12 +68,13 @@
             mobileMenu.classList.remove('active');
             mobileOverlay.classList.remove('active');
             
-            // Wait for animation to complete before hiding
+            // Hide overlay immediately to prevent click blocking
+            // The CSS transition will handle the fade out animation
             setTimeout(() => {
                 if (!mobileOverlay.classList.contains('active')) {
                     mobileOverlay.style.display = 'none';
                 }
-            }, 300);
+            }, 10); // Much shorter delay - just enough for the class removal to register
             
             body.style.overflow = ''; // Restore scrolling
         }
