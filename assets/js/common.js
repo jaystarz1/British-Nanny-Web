@@ -189,11 +189,13 @@
                     if (isInMobileMenu) {
                         const mobileMenu = document.querySelector('.mobile-menu');
                         const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+                        const mobileToggle = document.querySelector('.mobile-menu-toggle');
                         
                         // Close menu immediately
                         if (mobileMenu) {
                             mobileMenu.classList.remove('active');
                             mobileOverlay?.classList.remove('active');
+                            mobileToggle?.classList.remove('active');
                             document.body.style.overflow = '';
                         }
                         
