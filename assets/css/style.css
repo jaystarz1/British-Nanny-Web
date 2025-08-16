@@ -190,7 +190,6 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 /* Logo - Mobile Optimized */
@@ -272,9 +271,6 @@ a:hover {
     display: none;
 }
 
-.nav-cta {
-    display: none;
-}
 
 /* Show Desktop Nav on Desktop Only */
 @media (min-width: 1024px) {
@@ -284,21 +280,27 @@ a:hover {
     
     .nav-menu {
         display: flex;
-        gap: var(--spacing-md);
+        gap: 1.25rem;
         align-items: center;
-        flex-wrap: wrap;
-    }
-    
-    .nav-cta {
-        display: block;
+        margin-right: 1rem;
     }
     
     .nav-menu a {
         font-weight: 600;
         position: relative;
-        padding: var(--spacing-sm);
+        padding: 0.5rem 0.75rem;
         white-space: nowrap;
-        font-size: 0.9rem;
+        font-size: 0.875rem;
+        background: transparent !important;
+        color: var(--dark-text);
+        text-decoration: none;
+    }
+    
+    .nav-menu a:focus,
+    .nav-menu a:active,
+    .nav-menu a:visited {
+        background: transparent !important;
+        color: var(--dark-text);
     }
     
     .nav-menu a::after {
@@ -318,8 +320,8 @@ a:hover {
     }
     
     .book-link, .daycare-link {
-        background: var(--light-gray);
-        padding: var(--spacing-sm) var(--spacing-md);
+        background: var(--light-gray) !important;
+        padding: 0.4rem 0.8rem !important;
         border-radius: 20px;
         font-size: 0.85rem;
     }
@@ -331,9 +333,9 @@ a:hover {
 }
 
 /* Large Desktop Navigation */
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
     .logo-text {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     
     .logo-subtitle {
@@ -341,11 +343,11 @@ a:hover {
     }
     
     .nav-menu {
-        gap: var(--spacing-lg);
+        gap: 1.5rem;
     }
     
     .nav-menu a {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -729,12 +731,30 @@ a:hover {
 }
 
 /* PHASE 1 FIX: Phone & CTA Buttons - PHASE 6 REFINED */
-.phone-btn, .btn-amazon, .btn-amazon-footer {
+.phone-btn {
+    background: var(--british-red) !important;
+    color: var(--white) !important;
+    border: 2px solid var(--british-red) !important;
+    padding: 0.4rem 1rem !important;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(207, 20, 43, 0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-left: auto;
+}
+
+.btn-amazon, .btn-amazon-footer {
     background: var(--british-red);
     color: var(--white);
-    border: none; /* No border */
+    border: none;
     padding: 14px 24px;
-    border-radius: 25px; /* Rounded */
+    border-radius: 25px;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(207, 20, 43, 0.3);
@@ -742,15 +762,24 @@ a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none; /* No underline */
+    text-decoration: none;
 }
 
-.phone-btn:hover, .btn-amazon:hover, .btn-amazon-footer:hover {
-    background: #B91C1C; /* Darker red */
+.phone-btn:hover {
+    background: var(--white) !important;
+    color: var(--british-red) !important;
+    border: 2px solid var(--british-red) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(207, 20, 43, 0.4);
+    text-decoration: none;
+}
+
+.btn-amazon:hover, .btn-amazon-footer:hover {
+    background: #B91C1C;
     color: var(--white);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(207, 20, 43, 0.4);
-    text-decoration: none; /* No underline on hover */
+    text-decoration: none;
 }
 
 /* ==========================================
