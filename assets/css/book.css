@@ -429,6 +429,37 @@ a[role="button"] + a[role="button"] {
 
 /* Mobile title sizing - REMOVED TO AVOID CONFLICTS */
 
+/* Mobile-specific constraints to prevent overflow */
+@media (max-width: 767px) {
+    .hero-book {
+        padding: 40px 15px;
+        overflow-x: hidden;
+    }
+    
+    .hero-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .hero-content-book {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .hero-text,
+    .hero-image {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .book-cover-hero {
+        max-width: 200px;
+        width: 100%;
+        height: auto;
+    }
+}
+
 /* Hero container layout */
 .hero-container {
     max-width: 1200px;
