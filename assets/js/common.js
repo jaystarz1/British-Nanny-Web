@@ -118,7 +118,7 @@
 
         // Close menu on window resize (if user rotates device)
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+            if (window.innerWidth >= 1024 && mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
@@ -189,6 +189,8 @@
                         top: targetPosition,
                         behavior: 'smooth'
                     });
+                } else {
+                    console.warn('Smooth scroll target not found:', href);
                 }
             });
         });
@@ -363,7 +365,7 @@
             });
         });
         
-        // Improve tap targets on small screens
+        // Improve tap targets on small screens (mobile only)
         if (window.innerWidth < 768) {
             const smallTargets = document.querySelectorAll('a, button');
             smallTargets.forEach(target => {
