@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Test</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; }
+        .test-nav { background: #f0f0f0; padding: 20px; margin-bottom: 20px; }
+        .test-nav a { display: inline-block; margin: 0 10px; padding: 10px; background: #007bff; color: white; text-decoration: none; }
+        section { height: 500px; padding: 20px; margin: 20px 0; border: 2px solid #ccc; }
+        .debug-output { background: #333; color: #0f0; padding: 20px; font-family: monospace; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="test-nav">
+        <h2>Test Navigation Links</h2>
+        <a href="#overview">Overview</a>
+        <a href="#inside">What's Inside</a>
+        <a href="#author">About Tracy</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="debug-output" id="debug">Debug output will appear here...</div>
+
+    <section id="overview" style="background: #ffe0e0;">
+        <h2>Overview Section</h2>
+        <p>This is the overview section.</p>
+    </section>
+
+    <section id="inside" style="background: #e0ffe0;">
+        <h2>Inside Section</h2>
+        <p>This is the inside section.</p>
+    </section>
+
+    <section id="author" style="background: #e0e0ff;">
+        <h2>Author Section</h2>
+        <p>This is the author section.</p>
+    </section>
+
+    <section id="reviews" style="background: #ffffe0;">
+        <h2>Reviews Section</h2>
+        <p>This is the reviews section.</p>
+    </section>
+
+    <section id="faq" style="background: #ffe0ff;">
+        <h2>FAQ Section</h2>
+        <p>This is the FAQ section.</p>
+    </section>
+
+    <script>
+        const debug = document.getElementById('debug');
+        
+        function log(msg) {
+            debug.textContent += msg + '\n';
+            console.log(msg);
+        }
+
+        // Test 1: Check if sections exist
+        log('=== Section Check ===');
+        const sectionIds = ['overview', 'inside', 'author', 'reviews', 'faq'];
+        sectionIds.forEach(id => {
+            const element = document.getElementById(id);
+            log(`Section #${id}: ${element ? 'FOUND' : 'NOT FOUND'}`);
+        });
+
+        // Test 2: Check navigation links
+        log('\n=== Navigation Links Check ===');
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            const href = link.getAttribute('href');
+            const targetId = href.substring(1);
+            const target = document.getElementById(targetId);
+            log(`Link ${href}: Target ${target ? 'EXISTS' : 'MISSING'}`);
+            
+            // Add click handler
+            link.addEventListener('click', function(e) {
+                log(`\nClicked: ${href}`);
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    log(`Scrolling to ${href}...`);
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    log(`ERROR: Target ${href} not found!`);
+                }
+            });
+        });
+
+        // Test 3: Load common.js and check for errors
+        log('\n=== Loading Scripts ===');
+        
+        const script = document.createElement('script');
+        script.src = 'assets/js/common.js';
+        script.onload = () => log('common.js loaded successfully');
+        script.onerror = () => log('ERROR: Failed to load common.js');
+        document.head.appendChild(script);
+
+        // Catch any JavaScript errors
+        window.addEventListener('error', function(e) {
+            log(`\nJavaScript ERROR: ${e.message}\nFile: ${e.filename}\nLine: ${e.lineno}`);
+        });
+    </script>
+</body>
+</html>
