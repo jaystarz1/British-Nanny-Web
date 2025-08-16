@@ -373,25 +373,27 @@ a[role="button"] + a[role="button"] {
 
 /* Hero Section with READABLE text */
 .hero-book {
-    background: linear-gradient(135deg, #012169 0%, #02195C 100%);
-    color: #FFFFFF;
-    padding: 60px 20px;
-    text-align: center;
+    background: linear-gradient(135deg, var(--british-navy, #012169) 0%, #01194d 100%);
+    color: var(--white, #FFFFFF);
+    padding: 60px 20px 50px;
     position: relative;
-    overflow: visible;
-    min-height: auto;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 /* Book title styling */
 .hero-title-book {
-    color: #FFFFFF !important;
-    font-size: 1.75rem !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    margin: 15px 0 !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
-    font-family: 'Merriweather', serif !important;
-    text-align: center !important;
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Merriweather', serif;
+    text-align: center;
 }
 
 /* Right-align title on desktop */
@@ -418,121 +420,50 @@ a[role="button"] + a[role="button"] {
 }
 
 .hero-subtitle-book {
-    color: #FFFFFF !important;
-    font-size: 1.25rem !important;
-    font-weight: 400 !important;
-    margin: 15px 0 25px !important;
-    opacity: 0.95 !important;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) !important;
-    text-align: center !important; /* Center on mobile */
+    color: #FFFFFF;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 15px 0 25px;
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-/* Mobile-specific hero fixes - COMPLETE REWRITE */
+/* Mobile-specific hero adjustments - matching daycare pattern */
 @media (max-width: 767px) {
     .hero-book {
-        padding: 30px 10px !important;
-        min-height: auto !important;
-        overflow: visible !important;
-        background: linear-gradient(135deg, #012169 0%, #02195C 100%) !important;
-    }
-    
-    .hero-container {
-        padding: 0 !important;
-        margin: 0 !important;
-        max-width: 100% !important;
-        width: 100% !important;
-    }
-    
-    .hero-content-book {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 15px !important;
-        padding: 0 !important;
-        width: 100% !important;
-        align-items: center !important;
-    }
-    
-    .hero-text {
-        width: 100% !important;
-        padding: 0 5px !important;
-        text-align: center !important;
-    }
-    
-    .rating-stars {
-        font-size: 0.9rem !important;
-        margin-bottom: 10px !important;
-    }
-    
-    .rating-text {
-        font-size: 0.75rem !important;
-        display: block !important;
-        margin-top: 5px !important;
+        padding: 40px 20px;
+        min-height: auto;
     }
     
     .hero-title-book {
-        font-size: 1.4rem !important;
-        line-height: 1.2 !important;
-        margin: 10px 0 !important;
-        padding: 0 5px !important;
-        color: #FFFFFF !important;
+        font-size: 1.75rem;
+        margin: 15px 0;
     }
     
     .hero-subtitle-book {
-        font-size: 0.85rem !important;
-        margin: 10px 0 !important;
-        padding: 0 5px !important;
-        color: #FFFFFF !important;
-        opacity: 0.95 !important;
+        font-size: 1rem;
+        margin: 10px 0;
     }
     
     .hero-benefits-simple {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 6px !important;
-        margin: 15px 0 !important;
-        padding: 0 10px !important;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0;
     }
     
     .hero-benefits-simple span {
-        font-size: 0.8rem !important;
-        padding: 6px 10px !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        border-radius: 20px !important;
-        color: #FFFFFF !important;
+        font-size: 0.9rem;
     }
     
     .hero-image {
-        width: 100% !important;
-        max-width: 200px !important;
-        margin: 15px auto !important;
+        max-width: 250px;
+        margin: 20px auto;
     }
     
     .book-cover-hero {
-        width: 100% !important;
-        height: auto !important;
-        max-width: 180px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    .hero-cta-book {
-        margin-top: 15px !important;
-        width: 100% !important;
-        padding: 0 10px !important;
-    }
-    
-    .hero-cta-book .btn-primary,
-    .hero-cta-book .btn-large {
-        width: 100% !important;
-        padding: 14px 20px !important;
-        font-size: 0.95rem !important;
-        min-height: 48px !important;
-    }
-    
-    .cta-subtitle {
-        font-size: 0.8rem !important;
-        margin-top: 8px !important;
-        color: #FFFFFF !important;
-        opacity: 0.9 !important;
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -1078,11 +1009,6 @@ select:focus {
     font-weight: 700;
 }
 
-.hero-subtitle-book {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    opacity: 0.95;
-}
 
 .hero-benefits-simple {
     display: flex;
@@ -1472,16 +1398,6 @@ section {
     color: #FFFFFF !important;
 }
 
-/* Override any inherited dark text colors */
-.hero-book .hero-title-book,
-.hero-book .hero-subtitle-book {
-    color: #FFFFFF !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-    position: relative !important;
-    z-index: 10 !important;
-}
 
 /* Ensure hero text container is visible */
 .hero-text {
