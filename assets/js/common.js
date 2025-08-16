@@ -28,7 +28,13 @@
         }
 
         // Toggle mobile menu
-        function toggleMobileMenu() {
+        function toggleMobileMenu(e) {
+            // Prevent default button behavior and stop event bubbling
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
             const isActive = mobileToggle.classList.contains('active');
             
             if (isActive) {
