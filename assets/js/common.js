@@ -29,7 +29,7 @@
 
         // Toggle mobile menu
         function toggleMobileMenu() {
-            const isActive = mobileMenu.classList.contains('active');
+            const isActive = mobileToggle.classList.contains('active');
             
             if (isActive) {
                 closeMobileMenu();
