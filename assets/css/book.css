@@ -1599,6 +1599,86 @@ a[class*="btn-"]:focus {
 }
 
 /* ==========================================
+   TEXT OVERFLOW FIXES FOR ALL SECTIONS
+   ========================================== */
+
+/* Ensure all text content wraps properly */
+.book-overview,
+.whats-inside,
+.differentiation,
+.author-section,
+.reviews-section,
+.faq-section,
+.problem-solution,
+.final-cta {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Fix text overflow in lists */
+.check-list,
+.bonus-list,
+.credentials-list {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.check-list div,
+.bonus-list span,
+.credentials-list div {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Fix long titles and quotes */
+.section-title,
+.section-subtitle,
+blockquote p,
+.review-card blockquote p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* Mobile text overflow prevention */
+@media (max-width: 767px) {
+    .container,
+    .hero-container,
+    section {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    p, div, span, li {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+}
+
+/* ==========================================
+   BOOK PAGE NAVIGATION FIX FOR TABLETS
+   ========================================== */
+
+/* Keep mobile menu for tablets on book page (768px-1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Keep mobile menu for tablets on book page */
+    .nav-menu {
+        display: none !important;
+    }
+    
+    .nav-cta {
+        display: none !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+}
+
+/* ==========================================
    PRINT STYLES
    ========================================== */
 
