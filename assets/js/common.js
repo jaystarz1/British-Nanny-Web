@@ -101,13 +101,8 @@
         mobileOverlay.addEventListener('click', closeMobileMenu);
 
         // Close menu when clicking on menu links
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                // Small delay to allow navigation
-                setTimeout(closeMobileMenu, 100);
-            });
-        });
+        // NOTE: Removed duplicate handler - smooth scrolling now handles mobile menu links
+        // This was causing conflicts with anchor navigation
 
         // Close menu on escape key
         document.addEventListener('keydown', (e) => {
@@ -176,19 +171,46 @@
                 // Skip empty hrefs or just #
                 if (!href || href === '#') return;
                 
-                e.preventDefault();
-                
                 const target = document.querySelector(href);
                 if (target) {
-                    const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
-                    const offset = 20; // Additional offset for breathing room
+                    e.preventDefault();
                     
+                    // Check if this is from mobile menu
+                    const isInMobileMenu = this.closest('.mobile-menu');
+                    
+                    // Get header height
+                    const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+                    const offset = 20;
+                    
+                    // Calculate target position
                     const targetPosition = target.offsetTop - headerHeight - offset;
                     
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    // If from mobile menu, close it first then scroll
+                    if (isInMobileMenu) {
+                        const mobileMenu = document.querySelector('.mobile-menu');
+                        const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+                        
+                        // Close menu immediately
+                        if (mobileMenu) {
+                            mobileMenu.classList.remove('active');
+                            mobileOverlay?.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                        
+                        // Then scroll after a tiny delay for the menu animation
+                        setTimeout(() => {
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }, 50);
+                    } else {
+                        // Desktop nav - immediate scroll
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
