@@ -1,0 +1,11 @@
+# Cache control for CSS files - revalidate every hour
+/assets/css/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  
+# Cache control for JS files - revalidate every hour  
+/assets/js/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Cache control for images - cache for 30 days
+/assets/images/*
+  Cache-Control: public, max-age=2592000, immutable
