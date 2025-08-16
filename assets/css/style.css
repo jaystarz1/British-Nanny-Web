@@ -594,22 +594,6 @@ a:hover {
     font-weight: 600;
 }
 
-/* Fix for resource submenu - MORE SPECIFIC selector */
-.mobile-menu nav div > a {
-    background: transparent !important;
-    padding: 0.75rem 1rem 0.75rem 2.5rem !important;
-    border-radius: 0 !important;
-    font-size: 0.9rem !important;
-    font-weight: 400 !important;
-    text-align: left !important;
-}
-
-.mobile-menu nav div > a:hover {
-    background: rgba(1, 33, 105, 0.05) !important;
-    transform: none !important;
-    color: #012169 !important;
-}
-
 .mobile-phone, .mobile-amazon {
     background: var(--british-red) !important;
     color: var(--white) !important;
