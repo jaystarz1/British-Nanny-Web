@@ -378,20 +378,20 @@ a[role="button"] + a[role="button"] {
     padding: 60px 20px;
     text-align: center;
     position: relative;
-    overflow: hidden;
-    min-height: 500px;
+    overflow: visible;
+    min-height: auto;
 }
 
-/* CRITICAL FIX: Make the title clearly visible AND RIGHT-ALIGNED */
+/* Book title styling */
 .hero-title-book {
     color: #FFFFFF !important;
-    font-size: 1.9rem !important; /* Smaller to fit on 2 lines */
+    font-size: 1.75rem !important;
     font-weight: 700 !important;
-    line-height: 1.15 !important; /* Tighter line height */
-    margin: 20px 0 !important;
+    line-height: 1.2 !important;
+    margin: 15px 0 !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
     font-family: 'Merriweather', serif !important;
-    text-align: center !important; /* Center on mobile */
+    text-align: center !important;
 }
 
 /* Right-align title on desktop */
@@ -427,7 +427,72 @@ a[role="button"] + a[role="button"] {
     text-align: center !important; /* Center on mobile */
 }
 
-/* Mobile title sizing - REMOVED TO AVOID CONFLICTS */
+/* Mobile-specific hero fixes */
+@media (max-width: 767px) {
+    .hero-book {
+        padding: 40px 15px;
+        min-height: auto;
+    }
+    
+    .hero-container {
+        padding: 0;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
+    .hero-content-book {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+    }
+    
+    .hero-text {
+        width: 100%;
+        padding: 0 10px;
+    }
+    
+    .hero-title-book {
+        font-size: 1.5rem !important;
+        margin: 10px 0 !important;
+    }
+    
+    .hero-subtitle-book {
+        font-size: 0.9rem !important;
+        margin: 10px 0 !important;
+    }
+    
+    .hero-benefits-simple {
+        flex-direction: column;
+        gap: 8px;
+        margin: 15px 0;
+    }
+    
+    .hero-benefits-simple span {
+        font-size: 0.85rem;
+    }
+    
+    .hero-image {
+        width: 100%;
+        max-width: 250px;
+        margin: 20px auto;
+    }
+    
+    .book-cover-hero {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+    }
+    
+    .hero-cta-book {
+        margin-top: 20px;
+    }
+    
+    .hero-cta-book .btn-primary {
+        width: 100%;
+        padding: 16px 20px !important;
+        font-size: 1rem !important;
+    }
+}
 
 /* Hero container layout */
 .hero-container {

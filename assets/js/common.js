@@ -17,7 +17,14 @@
         const mobileClose = document.querySelector('.mobile-menu-close');
         const body = document.body;
 
-        if (!mobileToggle || !mobileMenu || !mobileOverlay) return;
+        if (!mobileToggle || !mobileMenu || !mobileOverlay) {
+            console.error('Mobile menu elements not found:', {
+                toggle: !!mobileToggle,
+                menu: !!mobileMenu,
+                overlay: !!mobileOverlay
+            });
+            return;
+        }
 
         // Add hamburger animation spans if not present
         if (mobileToggle.children.length === 0) {
@@ -92,7 +99,10 @@
         }
 
         // Event listeners
-        mobileToggle.addEventListener('click', toggleMobileMenu);
+        mobileToggle.addEventListener('click', function(e) {
+            console.log('Mobile menu toggle clicked');
+            toggleMobileMenu();
+        });
         
         if (mobileClose) {
             mobileClose.addEventListener('click', closeMobileMenu);
