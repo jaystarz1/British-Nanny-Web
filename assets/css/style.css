@@ -379,25 +379,32 @@ a:hover {
 .nav-menu .dropdown-menu { 
     display: none; 
     position: absolute; 
-    top: calc(100% + 0.5rem);
+    top: 100%; /* No gap - menu starts right at bottom of link */
     left: 50%;
     transform: translateX(-50%);
     background: white; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     border-radius: 8px;
     min-width: 220px;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0 0.5rem 0; /* Added top padding for visual spacing */
     z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Invisible bridge to maintain hover state */
+.nav-menu .dropdown::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    right: -20px;
+    height: 20px; /* Generous hover area */
+    z-index: 999;
+    /* Uncomment to debug: background: rgba(255,0,0,0.2); */
 }
 
 @media (min-width: 1024px) {
     .nav-menu .dropdown:hover .dropdown-menu { 
         display: block;
-        opacity: 1;
-        visibility: visible;
     }
 }
 
