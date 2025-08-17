@@ -165,6 +165,8 @@
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
 .phone-btn:hover {

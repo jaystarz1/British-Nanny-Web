@@ -754,6 +754,8 @@ a:hover {
     cursor: pointer;
     font-size: 0.875rem;
     margin-left: auto;
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
 .btn-amazon, .btn-amazon-footer {

@@ -322,7 +322,7 @@
             <div class="fab-menu">
                 <a href="tel:613-XXX-XXXX" class="fab-action phone">
                     <span class="fab-icon">📞</span>
-                    <span class="fab-label">Call Now</span>
+                    <span class="fab-label">Call/Text Me</span>
                 </a>
                 <a href="mailto:thebritishnanny2@gmail.com" class="fab-action email">
                     <span class="fab-icon">✉️</span>
@@ -534,7 +534,7 @@
             const banner = document.createElement('div');
             banner.className = 'emergency-contact';
             banner.innerHTML = `
-                <a href="tel:613-XXX-XXXX">📞 Call Now for Immediate Enrollment!</a>
+                <a href="tel:613-XXX-XXXX">📞 Call/Text Me for Immediate Enrollment!</a>
             `;
             
             document.body.appendChild(banner);
