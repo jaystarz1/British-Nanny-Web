@@ -3,8 +3,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /assets/js/
-Disallow: /assets/css/
 
 # Sitemap location
 Sitemap: https://thebritishnanny.ca/sitemap.xml
