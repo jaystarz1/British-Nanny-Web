@@ -36,4 +36,4 @@ build/
 # Image originals (keep only optimized versions)
 *.psd
 *.ai
-*.sketch
+*.sketchbackup-images-*
