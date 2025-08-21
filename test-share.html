@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Button Test - The British Nanny's Daycare</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            padding: 50px;
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #012169;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-info {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .test-info h2 {
+            color: #CF142B;
+            margin-bottom: 15px;
+        }
+        .test-info ul {
+            line-height: 1.8;
+        }
+        .test-info li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Share Button Test Page</h1>
+    
+    <div class="test-info">
+        <h2>Testing Social Share Functionality</h2>
+        <p>Look for the red "Share" button in the bottom-right corner of the page.</p>
+        
+        <h3>Features:</h3>
+        <ul>
+            <li>✅ <strong>LinkedIn:</strong> Share this page on LinkedIn</li>
+            <li>✅ <strong>Facebook:</strong> Share this page on Facebook (replaced X/Twitter)</li>
+            <li>✅ <strong>Email:</strong> Send this page via email</li>
+            <li>✅ <strong>Copy Link:</strong> Copy the page URL to clipboard</li>
+        </ul>
+        
+        <h3>Implementation Details:</h3>
+        <ul>
+            <li>Share button appears on all pages</li>
+            <li>Fixed position in bottom-right corner</li>
+            <li>British theme colors (red button, navy menu border)</li>
+            <li>Mobile-responsive design</li>
+            <li>Click outside menu to close</li>
+        </ul>
+        
+        <h3>Pages Updated:</h3>
+        <ul>
+            <li>index.html</li>
+            <li>potty-training-book.html</li>
+            <li>parent-resources.html</li>
+            <li>All resource pages (choosing-daycare, interview-questions, etc.)</li>
+        </ul>
+    </div>
+
+    <!-- Share Button -->
+    <div class="share-button-container">
+        <button id="share-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a3 3 0 10-4.732 2.684m4.732-2.684l-4.732 2.684m0 0a3 3 0 01-4.732-2.684m4.732 2.684l-4.732-2.684m0 0a3 3 0 00-4.732-2.684" />
+            </svg>
+            Share
+        </button>
+    </div>
+    
+    <!-- Share Menu -->
+    <div id="share-menu-inline">
+        <div onclick="shareToLinkedIn()">
+            <span class="share-icon">🔗</span>
+            LinkedIn
+        </div>
+        <div onclick="shareToFacebook()">
+            <span class="share-icon">📘</span>
+            Facebook
+        </div>
+        <div onclick="shareToEmail()">
+            <span class="share-icon">✉️</span>
+            Email
+        </div>
+        <div onclick="shareCopyLink()">
+            <span class="share-icon">📋</span>
+            Copy Link
+        </div>
+    </div>
+
+    <script src="assets/js/share.js"></script>
+</body>
+</html>

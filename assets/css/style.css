@@ -1319,3 +1319,107 @@ footer {
         page-break-after: avoid;
     }
 }
+
+/* ==========================================
+   Share Button Styles
+   ========================================== */
+
+.share-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9998;
+}
+
+#share-btn {
+    background: var(--british-red);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(207, 20, 43, 0.3);
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#share-btn:hover {
+    background: var(--british-navy);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(1, 33, 105, 0.3);
+}
+
+#share-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+#share-menu-inline {
+    position: fixed;
+    background: white;
+    border: 2px solid var(--british-navy);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    z-index: 999999;
+    display: none;
+    min-width: 200px;
+    bottom: 80px;
+    right: 20px;
+}
+
+#share-menu-inline > div {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: var(--british-navy);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#share-menu-inline > div:hover {
+    background: var(--soft-blue);
+    transform: translateX(3px);
+}
+
+#share-menu-inline .share-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .share-button-container {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    #share-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    #share-menu-inline {
+        bottom: 70px;
+        right: 15px;
+        min-width: 180px;
+    }
+}
+
+/* Hide share button on print */
+@media print {
+    .share-button-container,
+    #share-menu-inline {
+        display: none !important;
+    }
+}
