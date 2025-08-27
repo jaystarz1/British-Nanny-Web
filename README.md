@@ -52,7 +52,7 @@ thebritishnanny.ca/
 - **Business Name:** The British Nanny's Daycare
 - **Owner:** Tracy (NNEB-Certified British Nanny)
 - **Location:** Barrhaven, Ottawa, Canada
-- **Service Area:** All of Western Ottawa
+- **Service Area:** All of Ottawa South
 - **Contact:** thebritishnanny@gmail.com | (613) 355-5544
 - **Hours:** Monday-Friday, 7:30 AM - 5:00 PM
 - **Rate:** $55/day
@@ -131,7 +131,7 @@ git push origin main
 ### Daycare Page (Local)
 - daycare Ottawa
 - home daycare Barrhaven
-- childcare western Ottawa
+- childcare Ottawa South
 - British nanny Ottawa
 - allergy friendly daycare
 - NNEB certified daycare
