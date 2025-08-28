@@ -1964,9 +1964,8 @@
 
 .featured-current-testimonial .testimonial-badge {
     position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 25px;
+    left: 20px;
     background: linear-gradient(135deg, var(--british-red) 0%, #E63946 100%);
     color: white;
     padding: 8px 20px;
@@ -1992,7 +1991,7 @@
 }
 
 .featured-current-testimonial .testimonial-content {
-    margin-top: 35px;
+    margin-top: 65px;
     flex-grow: 1;
 }
 
