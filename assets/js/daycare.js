@@ -758,3 +758,50 @@
     }
 
 })();
+
+// ==========================================
+// TESTIMONIAL READ MORE FUNCTIONALITY
+// ==========================================
+
+function toggleReadMore(button) {
+    const testimonialContent = button.parentElement;
+    const textElement = testimonialContent.querySelector('.testimonial-text');
+    const isExpanded = !textElement.classList.contains('truncated');
+    
+    if (isExpanded) {
+        // Collapse text
+        const truncatedText = textElement.getAttribute('data-truncated-text');
+        if (truncatedText) {
+            textElement.textContent = truncatedText;
+        } else {
+            // Store truncated version first time
+            const fullText = textElement.getAttribute('data-full-text');
+            const truncated = fullText.substring(0, 200) + '...';
+            textElement.setAttribute('data-truncated-text', truncated);
+            textElement.textContent = truncated;
+        }
+        textElement.classList.add('truncated');
+        button.textContent = 'read more';
+    } else {
+        // Expand text
+        const fullText = textElement.getAttribute('data-full-text');
+        if (!textElement.getAttribute('data-truncated-text')) {
+            // Store current truncated text for later
+            textElement.setAttribute('data-truncated-text', textElement.textContent);
+        }
+        textElement.textContent = fullText;
+        textElement.classList.remove('truncated');
+        button.textContent = 'read less';
+    }
+    
+    // Smooth scroll to keep testimonial in view
+    setTimeout(() => {
+        const testimonialCard = button.closest('.testimonial-float-left, .testimonial-float-right');
+        if (testimonialCard) {
+            testimonialCard.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest'
+            });
+        }
+    }, 100);
+}
