@@ -1921,6 +1921,201 @@
 }
 
 /* ==========================================
+   We Understand Section (NEW)
+   ========================================== */
+
+.we-understand-section {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, #1a2847 0%, var(--british-navy) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.understand-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.understand-title {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.understand-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+.understand-message {
+    text-align: center;
+}
+
+.lead-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.understand-points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.understand-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 4px solid var(--british-red);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.understand-point:hover {
+    background: white;
+    transform: translateX(5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.point-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.point-content h3 {
+    color: var(--british-navy);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.point-content p {
+    color: #4a5568;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: left;
+    margin: 0;
+}
+
+.understand-cta {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.cta-text {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.btn-light {
+    background: white;
+    color: var(--british-navy);
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+.btn-light:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Tablet responsive */
+@media (min-width: 768px) {
+    .understand-points {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .understand-point {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+/* Desktop responsive */
+@media (min-width: 1024px) {
+    .we-understand-section {
+        padding: 120px 5%;
+    }
+    
+    .understand-title {
+        font-size: 3rem;
+    }
+    
+    .understand-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+    .we-understand-section {
+        padding: 60px 5%;
+    }
+    
+    .understand-title {
+        font-size: 2rem;
+    }
+    
+    .understand-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    
+    .lead-text {
+        font-size: 1.05rem;
+        margin-bottom: 40px;
+    }
+    
+    .understand-point {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    
+    .point-content h3,
+    .point-content p {
+        text-align: center;
+    }
+    
+    .point-icon {
+        font-size: 2rem;
+    }
+    
+    .understand-points {
+        gap: 25px;
+    }
+}
+
+/* ==========================================
    TESTIMONIALS SECTION - PHASE 2 PADDING FIX
    ========================================== */
 
