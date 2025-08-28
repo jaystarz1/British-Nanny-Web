@@ -1896,15 +1896,33 @@
         padding: 6px 15px;
     }
     
+    /* Style float-text-content as a card on mobile to match testimonial */
+    .float-text-content {
+        max-width: 100%;
+        background: white;
+        border-radius: 15px;
+        padding: 25px 35px;
+        box-shadow: 0 10px 40px rgba(1, 33, 105, 0.12);
+        border-left: 5px solid var(--british-navy);
+        margin-top: 0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
     .float-text-content h3,
     .float-text-content-left h3 {
         font-size: 1.5rem;
-        text-align: center;
+        text-align: left;
+        color: var(--british-navy);
+        margin-bottom: 18px;
+        font-weight: 700;
     }
     
     .float-text-content p,
     .float-text-content-left p {
-        text-align: center;
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--dark-text);
     }
     
     .testimonial-float-wrapper {
