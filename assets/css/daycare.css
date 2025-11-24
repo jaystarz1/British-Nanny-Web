@@ -1119,17 +1119,40 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
     }
-    
+
     .services {
         padding: 80px 5%;
     }
-    
+
     .section-title {
         font-size: 42px;
     }
-    
+
     .section-subtitle {
         font-size: 20px;
+    }
+}
+
+/* ==========================================
+   RESOURCES GRID - 2x2 Layout
+   ========================================== */
+
+/* Mobile - 1 column */
+.resources-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* Tablet and up - 2 columns (2x2 grid) */
+@media (min-width: 768px) {
+    .resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
