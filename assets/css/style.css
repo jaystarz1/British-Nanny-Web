@@ -1392,25 +1392,25 @@ footer {
 }
 
 #share-menu-inline .share-icon {
-    font-size: 18px;
-    width: 24px;
-    text-align: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .share-button-container {
-        bottom: 15px;
+        bottom: 80px;
         right: 15px;
     }
-    
+
     #share-btn {
         padding: 10px 20px;
         font-size: 14px;
     }
-    
+
     #share-menu-inline {
-        bottom: 70px;
+        bottom: 135px;
         right: 15px;
         min-width: 180px;
     }

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Consent Test Page</title>
+
+    <!-- Cookie Consent System - Must load before GA -->
+    <script src="assets/js/cookie-consent.js"></script>
+
+    <!-- Google Analytics will be loaded by cookie-consent.js if consent is given -->
+    <!-- GA ID: G-J0JMKSKNY7 -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            color: #012169;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 10px;
+        }
+
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .test-button {
+            background: #012169;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .test-button:hover {
+            background: #023788;
+        }
+
+        #consent-status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .status-none {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .status-accepted {
+            background: #d4f4dd;
+            color: #28A745;
+        }
+
+        .status-rejected {
+            background: #fdd;
+            color: #DC3545;
+        }
+
+        #ga-status {
+            padding: 10px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .cookie-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .footer-test {
+            margin-top: 40px;
+            padding: 20px;
+            background: #012169;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .cookie-footer-link {
+            color: #FFD700;
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍪 Cookie Consent System Test Page</h1>
+
+    <div class="test-section">
+        <h2>Current Consent Status</h2>
+        <div id="consent-status">Checking...</div>
+        <div id="ga-status">Google Analytics Status: Checking...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Controls</h2>
+        <button class="test-button" onclick="showBanner()">Show Banner</button>
+        <button class="test-button" onclick="showSettings()">Show Settings Modal</button>
+        <button class="test-button" onclick="acceptConsent()">Simulate Accept</button>
+        <button class="test-button" onclick="rejectConsent()">Simulate Reject</button>
+        <button class="test-button" onclick="resetConsent()">Reset Consent</button>
+        <button class="test-button" onclick="checkGAStatus()">Check GA Status</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Current Cookies</h2>
+        <div class="cookie-list" id="cookie-list">Loading...</div>
+        <button class="test-button" onclick="refreshCookies()">Refresh Cookie List</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Google Analytics Test</h2>
+        <p>Click the button below to send a test event to GA (will only work if consent is given):</p>
+        <button class="test-button" onclick="sendTestEvent()">Send Test Event</button>
+        <div id="event-result"></div>
+    </div>
+
+    <div class="footer-test">
+        <h3>Footer Links Test</h3>
+        <p>
+            <a href="#" data-cookie-settings class="cookie-footer-link">Cookie Preferences</a> |
+            <a href="#" data-cookie-reset class="cookie-footer-link">Reset Consent</a>
+        </p>
+    </div>
+
+    <script>
+        function updateStatus() {
+            const consent = CookieConsent.getConsent();
+            const statusEl = document.getElementById('consent-status');
+
+            if (consent === null) {
+                statusEl.textContent = 'No consent given yet';
+                statusEl.className = 'status-none';
+            } else if (consent === true) {
+                statusEl.textContent = '✅ Consent ACCEPTED - Analytics enabled';
+                statusEl.className = 'status-accepted';
+            } else {
+                statusEl.textContent = '❌ Consent REJECTED - Analytics blocked';
+                statusEl.className = 'status-rejected';
+            }
+
+            checkGAStatus();
+            refreshCookies();
+        }
+
+        function checkGAStatus() {
+            const gaDisabled = window['ga-disable-G-J0JMKSKNY7'];
+            const gaStatusEl = document.getElementById('ga-status');
+
+            if (gaDisabled) {
+                gaStatusEl.innerHTML = '<strong>Google Analytics Status:</strong> ❌ BLOCKED (ga-disable flag is true)';
+                gaStatusEl.style.background = '#fdd';
+                gaStatusEl.style.borderColor = '#dc3545';
+            } else {
+                gaStatusEl.innerHTML = '<strong>Google Analytics Status:</strong> ✅ ENABLED (tracking active)';
+                gaStatusEl.style.background = '#d4f4dd';
+                gaStatusEl.style.borderColor = '#28a745';
+            }
+
+            // Check if gtag is defined and functional
+            if (typeof gtag === 'function') {
+                gaStatusEl.innerHTML += '<br>gtag function: Available';
+            } else {
+                gaStatusEl.innerHTML += '<br>gtag function: Not loaded';
+            }
+
+            // Check for GA cookies
+            const gaCookies = document.cookie.split(';').filter(c =>
+                c.trim().startsWith('_ga') || c.trim().startsWith('_gid')
+            );
+
+            if (gaCookies.length > 0) {
+                gaStatusEl.innerHTML += `<br>GA Cookies found: ${gaCookies.length}`;
+            } else {
+                gaStatusEl.innerHTML += '<br>No GA cookies found';
+            }
+        }
+
+        function refreshCookies() {
+            const cookies = document.cookie.split(';');
+            const listEl = document.getElementById('cookie-list');
+
+            if (cookies.length === 0 || (cookies.length === 1 && cookies[0] === '')) {
+                listEl.textContent = 'No cookies found';
+            } else {
+                listEl.innerHTML = cookies.map(c => {
+                    const trimmed = c.trim();
+                    if (trimmed.startsWith('_ga') || trimmed.startsWith('_gid')) {
+                        return `<div style="color: #dc3545;">🔍 ${trimmed}</div>`;
+                    } else if (trimmed.startsWith('gdpr_consent')) {
+                        return `<div style="color: #28a745;">✅ ${trimmed}</div>`;
+                    }
+                    return `<div>${trimmed}</div>`;
+                }).join('');
+            }
+        }
+
+        function showBanner() {
+            CookieConsent.showBanner();
+        }
+
+        function showSettings() {
+            CookieConsent.showSettings();
+        }
+
+        function acceptConsent() {
+            CookieConsent.acceptCookies();
+            updateStatus();
+        }
+
+        function rejectConsent() {
+            CookieConsent.rejectCookies();
+            updateStatus();
+        }
+
+        function resetConsent() {
+            CookieConsent.resetConsent();
+            updateStatus();
+        }
+
+        function sendTestEvent() {
+            const resultEl = document.getElementById('event-result');
+
+            if (typeof gtag === 'function' && !window['ga-disable-G-J0JMKSKNY7']) {
+                try {
+                    gtag('event', 'test_event', {
+                        'event_category': 'Test',
+                        'event_label': 'Cookie Consent Test'
+                    });
+                    resultEl.innerHTML = '<span style="color: green;">✅ Test event sent to Google Analytics!</span>';
+                } catch(e) {
+                    resultEl.innerHTML = '<span style="color: red;">❌ Error sending event: ' + e.message + '</span>';
+                }
+            } else {
+                resultEl.innerHTML = '<span style="color: orange;">⚠️ Google Analytics is not active (consent required)</span>';
+            }
+        }
+
+        // Initialize status on load
+        setTimeout(() => {
+            updateStatus();
+        }, 100);
+
+        // Update status every 2 seconds
+        setInterval(updateStatus, 2000);
+    </script>
+</body>
+</html>
