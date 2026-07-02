@@ -108,6 +108,47 @@
     box-shadow: 0 4px 15px rgba(207, 20, 43, 0.3);
 }
 
+/* Eye-catching "Spot Available" spotlight badge (August 17th) */
+.badge-spotlight {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: var(--british-red);
+    color: white;
+    padding: 14px 34px;
+    border-radius: 16px;
+    border: 3px solid var(--accent-gold, #FFD700);
+    box-shadow: 0 6px 22px rgba(207, 20, 43, 0.45), 0 0 0 6px rgba(255, 215, 0, 0.15);
+    animation: spotlight-pulse 1.8s ease-in-out infinite;
+}
+
+.badge-spotlight-tag {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--accent-gold, #FFD700);
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.badge-spotlight-date {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+@keyframes spotlight-pulse {
+    0%   { transform: scale(1);    box-shadow: 0 6px 22px rgba(207, 20, 43, 0.45), 0 0 0 4px rgba(255, 215, 0, 0.15); }
+    50%  { transform: scale(1.04); box-shadow: 0 8px 28px rgba(207, 20, 43, 0.55), 0 0 0 10px rgba(255, 215, 0, 0.28); }
+    100% { transform: scale(1);    box-shadow: 0 6px 22px rgba(207, 20, 43, 0.45), 0 0 0 4px rgba(255, 215, 0, 0.15); }
+}
+
+@media (min-width: 768px) {
+    .badge-spotlight-tag { font-size: 26px; }
+    .badge-spotlight-date { font-size: 18px; }
+}
+
 /* Title */
 .hero-title {
     font-size: 42px;
@@ -1383,6 +1424,89 @@
 .september-opening-section .container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+/* Spot Highlight - eye-catching August 17th card */
+.spot-highlight {
+    position: relative;
+    background: var(--british-red);
+    color: white;
+    padding: 32px 25px 28px;
+    border-radius: 14px;
+    border: 3px solid var(--accent-gold, #FFD700);
+    text-align: center;
+    max-width: 640px;
+    margin: 12px auto 0;
+    box-shadow: 0 8px 28px rgba(207, 20, 43, 0.35);
+}
+
+.spot-highlight-tag {
+    display: inline-block;
+    background: var(--accent-gold, #FFD700);
+    color: var(--british-navy);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.spot-highlight h3 {
+    color: white;
+    margin-bottom: 12px;
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+.spot-highlight p {
+    color: rgba(255, 255, 255, 0.97);
+    margin-bottom: 22px;
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+.spot-highlight .btn {
+    background: white;
+    color: var(--british-red);
+    padding: 13px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+.spot-highlight .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    background: var(--accent-gold, #FFD700);
+    color: var(--british-navy);
+    border-color: var(--accent-gold, #FFD700);
+}
+
+/* Subdued secondary note - September / waiting list */
+.spot-secondary {
+    max-width: 640px;
+    margin: 18px auto 0;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #6b6b6b;
+}
+
+.spot-secondary a {
+    color: var(--british-red);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .spot-highlight h3 { font-size: 30px; }
 }
 
 /* September Opening Bottom - Keep exact same styling */

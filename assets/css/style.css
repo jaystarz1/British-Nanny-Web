@@ -321,14 +321,16 @@ a:hover {
     
     .book-link, .daycare-link {
         background: var(--light-gray) !important;
+        color: var(--british-navy) !important;
         padding: 0.4rem 0.8rem !important;
         border-radius: 20px;
         font-size: 0.85rem;
     }
-    
+
     .book-link:hover, .daycare-link:hover {
-        background: var(--british-red);
-        color: var(--white);
+        background: var(--british-red) !important;
+        color: var(--white) !important;
+        transform: translateY(-2px);
     }
 }
 
