@@ -72,20 +72,32 @@
                 });
             }
             
-            // Simulate form submission (replace with actual form handler)
-            setTimeout(() => {
+            // Submit via FormSubmit AJAX endpoint
+            fetch('https://formsubmit.co/ajax/thebritishnanny2@gmail.com', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Submission failed');
+                return response.json();
+            })
+            .then(() => {
                 showFormSuccess();
                 contactForm.reset();
-                
-                // Reset button
+            })
+            .catch(() => {
+                showFormError();
+            })
+            .finally(() => {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
                 submitBtn.classList.remove('loading');
-            }, 2000);
+            });
         });
-        
+
         function validateForm(data) {
-            const required = ['name', 'email', 'message'];
+            const required = ['name', 'email', 'phone', 'child-age'];
             let isValid = true;
             
             required.forEach(field => {
@@ -148,6 +160,29 @@
             // Scroll to success message on mobile
             if (window.innerWidth < 768) {
                 successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function showFormError() {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'form-success form-error';
+            errorDiv.innerHTML = `
+                <div class="success-content">
+                    <h3>⚠️ Message Could Not Be Sent</h3>
+                    <p>Sorry, something went wrong. Please email us directly at
+                    <a href="mailto:thebritishnanny2@gmail.com">thebritishnanny2@gmail.com</a>
+                    or call/text (613) 355-5544.</p>
+                </div>
+            `;
+
+            contactForm.parentNode.insertBefore(errorDiv, contactForm.nextSibling);
+
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 15000);
+
+            if (window.innerWidth < 768) {
+                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
     }
