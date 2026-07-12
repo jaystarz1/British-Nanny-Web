@@ -60,9 +60,9 @@
             const submitBtn = this.querySelector('button[type="submit"], input[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = 'Opening your email…';
             submitBtn.classList.add('loading');
-            
+
             // Analytics
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'submit', {
@@ -71,41 +71,58 @@
                     'value': 1
                 });
             }
-            
-            // Submit via FormSubmit AJAX endpoint
-            fetch('https://formsubmit.co/ajax/107a6c39595e90f05982aa4eeed5afa8', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Submission failed');
-                return response.json();
-            })
-            .then(() => {
-                showFormSuccess();
-                contactForm.reset();
-            })
-            .catch(() => {
-                showFormError();
-            })
-            .finally(() => {
+
+            // Compose the enquiry and hand it to the parent's own mail app. No
+            // third-party relay: the email arrives from the parent's real address,
+            // so it lands in a normal Gmail thread that can be searched and replied to.
+            const emailBody = [
+                `Name: ${data.name || ''}`,
+                `Email: ${data.email || ''}`,
+                `Phone: ${data.phone || ''}`,
+                `Child's age: ${data['child-age'] || ''}`,
+                `Desired start date: ${data['start-date'] || '(not specified)'}`,
+                '',
+                'Message / special needs:',
+                data.message || '(none given)',
+                '',
+                '---',
+                'Sent from the enquiry form at thebritishnanny.ca'
+            ].join('\n');
+
+            const subject = `Daycare enquiry — ${data.name || 'New enquiry'}`;
+            const mailtoLink = 'mailto:thebritishnanny2@gmail.com'
+                + `?subject=${encodeURIComponent(subject)}`
+                + `&body=${encodeURIComponent(emailBody)}`;
+
+            window.location.href = mailtoLink;
+
+            // The form is deliberately NOT reset: if the visitor has no mail app
+            // registered, window.location does nothing, and wiping their answers
+            // would strand them with no way to recover what they typed.
+            showMailtoOpened();
+
+            setTimeout(() => {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
                 submitBtn.classList.remove('loading');
-            });
+            }, 1000);
         });
 
         function validateForm(data) {
-            const required = ['name', 'email', 'phone', 'child-age'];
+            const required = {
+                'name': "Your name",
+                'email': "Email",
+                'phone': "Phone number",
+                'child-age': "Your child's age"
+            };
             let isValid = true;
-            
-            required.forEach(field => {
+
+            Object.entries(required).forEach(([field, label]) => {
                 const input = contactForm.querySelector(`[name="${field}"]`);
                 const value = data[field]?.trim();
-                
+
                 if (!value) {
-                    showFieldError(input, `${field.charAt(0).toUpperCase() + field.slice(1)} is required`);
+                    showFieldError(input, `${label} is required`);
                     isValid = false;
                 } else {
                     clearFieldError(input);
@@ -140,49 +157,31 @@
             }
         }
         
-        function showFormSuccess() {
-            const successDiv = document.createElement('div');
-            successDiv.className = 'form-success';
-            successDiv.innerHTML = `
-                <div class="success-content">
-                    <h3>✅ Message Sent Successfully!</h3>
-                    <p>Thank you for your inquiry. We'll get back to you within 24 hours.</p>
-                </div>
-            `;
-            
-            contactForm.parentNode.insertBefore(successDiv, contactForm.nextSibling);
-            
-            // Remove success message after 5 seconds
-            setTimeout(() => {
-                successDiv.remove();
-            }, 5000);
-            
-            // Scroll to success message on mobile
-            if (window.innerWidth < 768) {
-                successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
+        // Never claims the message was delivered — the page cannot know that. It
+        // only reports what actually happened (the mail app was handed the draft)
+        // and tells the visitor the one thing still required of them.
+        function showMailtoOpened() {
+            const existing = contactForm.parentNode.querySelector('.form-success');
+            if (existing) existing.remove();
 
-        function showFormError() {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'form-success form-error';
-            errorDiv.innerHTML = `
+            const noticeDiv = document.createElement('div');
+            noticeDiv.className = 'form-success';
+            noticeDiv.innerHTML = `
                 <div class="success-content">
-                    <h3>⚠️ Message Could Not Be Sent</h3>
-                    <p>Sorry, something went wrong. Please email us directly at
+                    <h3>📧 Your email is ready to send</h3>
+                    <p>Your email app should have opened with your enquiry filled in.
+                    <strong>Please press Send</strong> — your message won't reach us until you do.</p>
+                    <p>Nothing opened? Email
                     <a href="mailto:thebritishnanny2@gmail.com">thebritishnanny2@gmail.com</a>
-                    or call/text (613) 355-5544.</p>
+                    or call/text <a href="tel:6133555544">(613) 355-5544</a>. Your answers above
+                    have been kept so you can copy them across.</p>
                 </div>
             `;
 
-            contactForm.parentNode.insertBefore(errorDiv, contactForm.nextSibling);
-
-            setTimeout(() => {
-                errorDiv.remove();
-            }, 15000);
+            contactForm.parentNode.insertBefore(noticeDiv, contactForm.nextSibling);
 
             if (window.innerWidth < 768) {
-                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                noticeDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
     }

@@ -896,11 +896,7 @@
                 <!-- Right Column: Contact Form -->
                 <div class="cta-form-card">
                     <h3>Schedule a Visit</h3>
-                    <form id="contact-form" class="cta-form" action="https://formsubmit.co/107a6c39595e90f05982aa4eeed5afa8" method="POST">
-                        <input type="hidden" name="_subject" value="New inquiry from thebritishnanny.ca">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_next" value="https://thebritishnanny.ca/?sent=1#contact">
-                        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <form id="contact-form" class="cta-form">
                         <div class="form-group">
                             <label for="parent-name">Parent's Name <span class="required">*</span></label>
                             <input type="text" id="parent-name" name="name" required>
@@ -940,7 +936,13 @@
                             <textarea id="message" name="message" rows="4" placeholder="Tell us about your child's needs, especially any allergies or special requirements"></textarea>
                         </div>
                         
-                        <button type="submit">Request Information & Schedule Visit</button>
+                        <button type="submit">Open Email &amp; Send Enquiry</button>
+
+                        <p class="form-fallback">
+                            This opens your email app with the details filled in &mdash; just press send.<br>
+                            Not working? Email <a href="mailto:thebritishnanny2@gmail.com">thebritishnanny2@gmail.com</a>
+                            or call/text <a href="tel:6133555544">(613) 355-5544</a>.
+                        </p>
                     </form>
                 </div>
             </div>

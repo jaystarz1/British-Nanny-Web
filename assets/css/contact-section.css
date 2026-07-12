@@ -199,3 +199,16 @@
     font-size: 0.85rem;
     margin-top: 0.25rem;
 }
+
+.form-fallback {
+    margin-top: 0.85rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #555;
+    text-align: center;
+}
+
+.form-fallback a {
+    color: #CF142B;
+    font-weight: 600;
+}
